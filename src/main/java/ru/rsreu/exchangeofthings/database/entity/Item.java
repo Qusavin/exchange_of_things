@@ -5,26 +5,29 @@ public class Item {
     private String title;
     private String description;
     private String image;
-    private String viewsNumber;
+    private Integer viewsNumber;
     private String category;
+    private Boolean isAvailable;
     private User owner;
 
-    public Item(String title, String description, String image, String viewsNumber, String category, User owner) {
+    public Item(String title, String description, String image, Integer viewsNumber, String category, Boolean isAvailable, User owner) {
         this.title = title;
         this.description = description;
         this.image = image;
         this.viewsNumber = viewsNumber;
         this.category = category;
+        this.isAvailable = isAvailable;
         this.owner = owner;
     }
 
-    public Item(Integer id, String title, String description, String image, String viewsNumber, String category, User owner) {
+    public Item(Integer id, String title, String description, String image, Integer viewsNumber, String category, Boolean isAvailable, User owner) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.image = image;
         this.viewsNumber = viewsNumber;
         this.category = category;
+        this.isAvailable = isAvailable;
         this.owner = owner;
     }
 
@@ -60,11 +63,11 @@ public class Item {
         this.image = image;
     }
 
-    public String getViewsNumber() {
+    public Integer getViewsNumber() {
         return viewsNumber;
     }
 
-    public void setViewsNumber(String viewsNumber) {
+    public void setViewsNumber(Integer viewsNumber) {
         this.viewsNumber = viewsNumber;
     }
 
@@ -82,5 +85,13 @@ public class Item {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public Boolean getAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(Boolean available) {
+        isAvailable = available;
     }
 }

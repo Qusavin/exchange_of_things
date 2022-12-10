@@ -73,6 +73,7 @@ CREATE TABLE items
     image VARCHAR2 (255 CHAR) NOT NULL,
     views_number NUMBER DEFAULT 0,
     category VARCHAR2 (50 CHAR) NOT NULL,
+    is_available NUMBER(1, 0) DEFAULT 0,
     owner_id NUMBER NOT NULL
 );
 
