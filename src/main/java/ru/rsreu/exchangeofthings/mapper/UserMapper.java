@@ -1,23 +1,32 @@
 package ru.rsreu.exchangeofthings.mapper;
 
-import ru.rsreu.exchangeofthings.entity.User;
+import ru.rsreu.exchangeofthings.data.UserWithSession;
+import ru.rsreu.exchangeofthings.database.entity.Session;
+import ru.rsreu.exchangeofthings.database.entity.User;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserMapper {
     private UserMapper() {
     }
 
-    public static User mapUser(ResultSet resultSet) throws SQLException {
-        return new User(
-                resultSet.getInt("id"),
-                resultSet.getString("username"),
-                resultSet.getString("password"),
-                resultSet.getString("name"),
-                resultSet.getBoolean("is_blocked"),
-                resultSet.getString("role")
-        );
+    public static UserWithSession mapSessionToUserWithSession(Session session) {
+        User user = session.getUser();
 
+        return new UserWithSession(
+                user.getId(),
+                user.getUsername(),
+                user.getPassword(),
+                user.getName(),
+                user.isOnline(session.getExpiredAt()),
+                user.getRole()
+        );
+    }
+
+    public static List<UserWithSession> mapSessionToUserWithSessionList(List<Session> sessions) {
+        return sessions.stream()
+                .map(UserMapper::mapSessionToUserWithSession)
+                .collect(Collectors.toList());
     }
 }

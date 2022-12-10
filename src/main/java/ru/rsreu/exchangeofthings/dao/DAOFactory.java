@@ -1,5 +1,6 @@
 package ru.rsreu.exchangeofthings.dao;
 
+import ru.rsreu.exchangeofthings.dao.impl.SessionDAOImpl;
 import ru.rsreu.exchangeofthings.dao.impl.UserDAOImpl;
 
 public class DAOFactory {
@@ -10,9 +11,9 @@ public class DAOFactory {
         return UserDAOImpl.getInstance();
     }
 
-//    public static SessionDAO getSessionDAO() {
-//        return SessionDAOImpl.getInstance();
-//    }
+    public static SessionDAO getSessionDAO() {
+        return SessionDAOImpl.getInstance();
+    }
 //
 //    public static ExpertSkillDAO getExpertSkillDAO() {
 //        return ExpertSkillDAOImpl.getInstance();

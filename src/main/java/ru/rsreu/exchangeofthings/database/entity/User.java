@@ -1,4 +1,6 @@
-package ru.rsreu.exchangeofthings.entity;
+package ru.rsreu.exchangeofthings.database.entity;
+
+import java.util.Date;
 
 public class User {
     private Integer id;
@@ -23,6 +25,10 @@ public class User {
         this.name = name;
         this.isBlocked = isBlocked;
         this.role = role;
+    }
+
+    public boolean isOnline(Date expiredAt) {
+        return expiredAt != null && expiredAt.after(new Date(System.currentTimeMillis()));
     }
 
     public Integer getId() {

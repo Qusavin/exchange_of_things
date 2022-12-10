@@ -1,4 +1,4 @@
-package ru.rsreu.exchangeofthings.entity;
+package ru.rsreu.exchangeofthings.database.entity;
 
 import java.util.Date;
 

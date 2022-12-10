@@ -1,4 +1,4 @@
-package ru.rsreu.exchangeofthings.entity;
+package ru.rsreu.exchangeofthings.database.entity;
 
 public class Item {
     private Integer id;

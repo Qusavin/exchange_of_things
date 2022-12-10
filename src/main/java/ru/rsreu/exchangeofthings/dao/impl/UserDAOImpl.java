@@ -2,8 +2,8 @@ package ru.rsreu.exchangeofthings.dao.impl;
 
 import ru.rsreu.exchangeofthings.dao.AbstractDAO;
 import ru.rsreu.exchangeofthings.dao.UserDAO;
-import ru.rsreu.exchangeofthings.entity.User;
-import ru.rsreu.exchangeofthings.mapper.UserMapper;
+import ru.rsreu.exchangeofthings.database.entity.User;
+import ru.rsreu.exchangeofthings.mapper.DAOMapper;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +24,7 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
             ResultSet resultSet = st.executeQuery();
 
             while (resultSet.next()) {
-                users.add(UserMapper.mapUser(resultSet));
+                users.add(DAOMapper.mapUser(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,7 +43,7 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
             ResultSet resultSet = st.executeQuery();
 
             while (resultSet.next()) {
-                return Optional.of(UserMapper.mapUser(resultSet));
+                return Optional.of(DAOMapper.mapUser(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -61,7 +61,7 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
             ResultSet resultSet = st.executeQuery();
 
             while (resultSet.next()) {
-                return Optional.of(UserMapper.mapUser(resultSet));
+                return Optional.of(DAOMapper.mapUser(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();

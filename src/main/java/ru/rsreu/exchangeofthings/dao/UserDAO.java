@@ -1,6 +1,6 @@
 package ru.rsreu.exchangeofthings.dao;
 
-import ru.rsreu.exchangeofthings.entity.User;
+import ru.rsreu.exchangeofthings.database.entity.User;
 
 import java.util.List;
 import java.util.Optional;
