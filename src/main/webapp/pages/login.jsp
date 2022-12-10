@@ -4,6 +4,6 @@
     <title>Login</title>
 </head>
 <body>
-  <div>Login</div>
+  <div>${users}</div>
 </body>
 </html>

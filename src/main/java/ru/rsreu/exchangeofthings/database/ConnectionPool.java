@@ -6,7 +6,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 
 public class ConnectionPool {
-    private static final String DATASOURCE_NAME = "java:/comp/env/jdbc/exchangeofthings";
+    private static final String DATASOURCE_NAME = "java:/comp/env/jdbc/yarik";
     private static volatile Connection connection;
 
     private ConnectionPool() {
