@@ -1,14 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8"
-         language="java"
-         import="ru.rsreu.exchangeofthings.data.Link,java.util.List,java.util.ArrayList"
-%>
-
-<%
-    List<Link> links = new ArrayList<>();
-
-    links.add(new Link("Admin Panel", "admin-panel"));
-    request.setAttribute("links", links);
-%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 <head>

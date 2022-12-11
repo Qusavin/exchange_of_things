@@ -10,13 +10,11 @@ public class Item {
     private Boolean isAvailable;
     private User owner;
 
-    public Item(String title, String description, String image, Integer viewsNumber, String category, Boolean isAvailable, User owner) {
+    public Item(String title, String image, String category, String description, User owner) {
         this.title = title;
-        this.description = description;
         this.image = image;
-        this.viewsNumber = viewsNumber;
         this.category = category;
-        this.isAvailable = isAvailable;
+        this.description = description;
         this.owner = owner;
     }
 

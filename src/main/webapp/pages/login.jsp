@@ -1,14 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" import="ru.rsreu.exchangeofthings.data.Link" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-
-<%
-    List<Link> links = new ArrayList<>();
-
-    links.add(new Link("Login", "login"));
-    request.setAttribute("links", links);
-%>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <%@include file="../templates/meta.jsp" %>
@@ -17,7 +7,7 @@
 <body class="dark:bg-slate-500">
     <%@include file="../templates/header.jsp" %>
     <div class="container mx-auto pt-14">
-        <form method="post" action="login" class="p-4 w-full max-w-sm mx-auto mt-2 border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <form id="login-form" class="p-4 w-full max-w-sm mx-auto mt-2 border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
             <div class="mb-6">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your username</label>
                 <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">

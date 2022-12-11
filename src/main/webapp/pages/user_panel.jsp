@@ -1,26 +1,15 @@
-<%@ page contentType="text/html;charset=UTF-8"
-         language="java"
-         import="ru.rsreu.exchangeofthings.data.Link,java.util.List,java.util.ArrayList"
-%>
-
-<%
-    List<Link> links = new ArrayList<>();
-
-    links.add(new Link("User Panel", "user-panel"));
-    request.setAttribute("links", links);
-%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 <head>
-    <%@include file="../templates/meta.jsp" %>
+    <%@include file="/templates/meta.jsp" %>
     <title>User Panel</title>
-    <%--    title image viewsNumber category isAvailable owner--%>
 </head>
 <body class="dark:bg-slate-500">
 <%@include file="./user-panel/header.jsp" %>
 
-<div class="container mx-auto pt-14">
-    <div class="w-3/5 mx-auto mt-8 overflow-x-auto relative drop-shadow-lg sm:rounded-lg">
+<div id="user-panel" class="container mx-auto pt-14">
+    <div class="mt-8 overflow-x-auto relative drop-shadow-lg sm:rounded-lg">
         <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#tab-content"
                 role="tablist">
@@ -61,24 +50,33 @@
                  id="my-things"
                  role="tabpanel"
                  aria-labelledby="my-things-tab">
-                <%@include file="user-panel/my_things_table.jsp" %>
+                <div id="my-things-container" class="mb-3">
+                    <%@include file="user-panel/my_things_table.jsp" %>
+                </div>
+                <div>
+                    <button type="button"
+                            class="exchange block ml-auto text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-2.5 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                            data-modal-toggle="add-thing-modal"
+                    >Add thing</button>
+                </div>
             </div>
             <div class="hidden rounded-lg"
                  id="my-things-on-exchange"
                  role="tabpanel"
                  aria-labelledby="my-things-on-exchange-tab">
-                <%@include file="user-panel/my_things_table.jsp" %>
+                <div id="my-things-on-exchange-container"></div>
             </div>
             <div class="hidden rounded-lg"
                  id="things-on-exchange"
                  role="tabpanel"
                  aria-labelledby="things-on-exchange-tab">
-                <%@include file="user-panel/my_things_table.jsp" %>
+                <div id="things-on-exchange-container"></div>
             </div>
         </div>
     </div>
 </div>
 
+<%@include file="./user-panel/add-thing.jsp" %>
 <%@include file="../templates/scripts.jsp" %>
 </body>
 </html>

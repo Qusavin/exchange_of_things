@@ -59,7 +59,7 @@ public class ItemDAOImpl extends AbstractDAO implements ItemDAO {
             ResultSet resultSet = st.executeQuery();
 
             while (resultSet.next()) {
-                return Optional.of(DAOMapper.mapItem(resultSet));
+                return Optional.of(DAOMapper.mapItemWithUser(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,11 +1,6 @@
-const myExchangeItemsTabElement = document.querySelector('#my-things-on-exchange-tab');
-const myExchangeItemsContainerElement = document.querySelector('#my-things-on-exchange');
+import {getUrlencodedFormData, redirect} from '../util.mjs';
 
-const myItemsTabElement = document.querySelector('#my-things-tab');
-const myItemsContainerElement = document.querySelector('#my-things');
-
-const exchangeItemsTabElement = document.querySelector('#things-on-exchange-tab');
-const exchangeItemsContainerElement = document.querySelector('#things-on-exchange');
+const userPanelElement = document.querySelector('#user-panel');
 
 const Table = {
     MY_ITEMS: 'my_items',
@@ -13,7 +8,77 @@ const Table = {
     MY_EXCHANGE_ITEMS: 'my_exchange_items'
 };
 
+
+const tableHydrateFunction = {
+    [Table.MY_ITEMS]: hydrateMyItemsTable,
+    [Table.MY_EXCHANGE_ITEMS]: hydrateMyExchangeItemsTable,
+    [Table.EXCHANGE_ITEMS]: hydrateExchangeItemsTable,
+};
+let tableContainer = {};
+
 let currentTable = Table.MY_ITEMS;
+
+if (userPanelElement !== null) {
+    main();
+}
+
+function main() {
+    const myExchangeItemsTabElement = document.querySelector('#my-things-on-exchange-tab');
+    const myExchangeItemsContainerElement = document.querySelector('#my-things-on-exchange-container');
+
+    const myItemsTabElement = document.querySelector('#my-things-tab');
+    const myItemsContainerElement = document.querySelector('#my-things-container');
+
+    const exchangeItemsTabElement = document.querySelector('#things-on-exchange-tab');
+    const exchangeItemsContainerElement = document.querySelector('#things-on-exchange-container');
+
+    tableContainer = {
+        [Table.MY_ITEMS]: myItemsContainerElement,
+        [Table.MY_EXCHANGE_ITEMS]: myExchangeItemsContainerElement,
+        [Table.EXCHANGE_ITEMS]: exchangeItemsContainerElement,
+    };
+
+    myItemsTabElement.addEventListener('click', () => {
+        fetchTable(Table.MY_ITEMS)
+            .then(html => renderCurrentTable(html));
+    });
+
+    myExchangeItemsTabElement.addEventListener('click', () => {
+        fetchTable(Table.MY_EXCHANGE_ITEMS)
+            .then(html => renderCurrentTable(html));
+    });
+
+    exchangeItemsTabElement.addEventListener('click', () => {
+        fetchTable(Table.EXCHANGE_ITEMS)
+            .then(html => renderCurrentTable(html));
+    });
+
+    hydrateMyItemsTable();
+
+    const addThingFormElement = document.querySelector('#add-thing-form');
+
+    addThingFormElement.addEventListener('submit', e => {
+        e.preventDefault();
+
+        const formData = new FormData(addThingFormElement);
+
+        fetch(`user-panel?table_part=${currentTable}&add_item=true`, {
+            method: 'post',
+            body: getUrlencodedFormData(formData),
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            }
+        })
+            .then(res => res.text())
+            .then(html => renderCurrentTable(html));
+    });
+}
+
+function renderCurrentTable(html) {
+    tableContainer[currentTable].innerHTML = html;
+    tableHydrateFunction[currentTable]();
+}
 
 function fetchTable(tableName) {
     currentTable = tableName;
@@ -24,32 +89,48 @@ function fetchTable(tableName) {
         .then(res => res.text());
 }
 
-myExchangeItemsTabElement.addEventListener('click', () => {
-    fetchTable(Table.MY_EXCHANGE_ITEMS)
-        .then(html => {
-            myExchangeItemsContainerElement.innerHTML = html;
-        });
-});
+function hydrateExchangeItemsTable() {
+    const tableRowElements = tableContainer[Table.EXCHANGE_ITEMS].querySelectorAll('.table-row');
 
-myItemsTabElement.addEventListener('click', () => {
-    fetchTable(Table.MY_ITEMS)
-        .then(html => {
-            myItemsContainerElement.innerHTML = html;
-            hydrateMyItemsTable();
-        });
-});
+    [...tableRowElements].forEach(tableRowElement => {
+        const itemId = tableRowElement.querySelector('.thing-id').innerText.trim();
+        const requestExchangeBtnElement = tableRowElement.querySelector('.request-exchange');
+        const openBtnElement = tableRowElement.querySelector('.open');
 
-exchangeItemsTabElement.addEventListener('click', () => {
-    fetchTable(Table.EXCHANGE_ITEMS)
-        .then(html => {
-            exchangeItemsContainerElement.innerHTML = html;
+        requestExchangeBtnElement.addEventListener('click', () => {
+            redirect(`user-panel/exchange?item_id=${itemId}`);
         });
-});
+        openBtnElement.addEventListener('click', () => {
+            redirect(`user-panel/thing?item_id=${itemId}`);
+        });
+    });
+}
 
-hydrateMyItemsTable();
+function hydrateMyExchangeItemsTable() {
+    const tableRowElements = tableContainer[Table.MY_EXCHANGE_ITEMS].querySelectorAll('.table-row');
+
+    [...tableRowElements].forEach(tableRowElement => {
+        const removeBtnElement = tableRowElement.querySelector('.remove');
+        const openBtnElement = tableRowElement.querySelector('.open');
+        const itemId = tableRowElement.querySelector('.thing-id').innerText.trim();
+
+        removeBtnElement.addEventListener('click', () => {
+            fetch(`user-panel?table_part=${currentTable}&exchange_item_id=${itemId}`, {
+                method: 'post',
+                credentials: 'same-origin',
+                cache: 'no-cache'
+            })
+                .then(res => res.text())
+                .then(html => renderCurrentTable(html));
+        });
+        openBtnElement.addEventListener('click', () => {
+            redirect(`user-panel/thing?item_id=${itemId}`);
+        });
+    });
+}
 
 function hydrateMyItemsTable() {
-    const tableRowElements = myItemsContainerElement.querySelectorAll('.table-row');
+    const tableRowElements = tableContainer[Table.MY_ITEMS].querySelectorAll('.table-row');
 
     [...tableRowElements].forEach(tableRowElement => {
         const removeBtnElement = tableRowElement.querySelector('.remove');
@@ -63,10 +144,7 @@ function hydrateMyItemsTable() {
                 cache: 'no-cache'
             })
                 .then(res => res.text())
-                .then(html => {
-                    myItemsContainerElement.innerHTML = html;
-                    hydrateMyItemsTable();
-                })
+                .then(html => renderCurrentTable(html));
         });
 
         addToExchangeBtnElement.addEventListener('click', () => {
@@ -76,10 +154,7 @@ function hydrateMyItemsTable() {
                 cache: 'no-cache'
             })
                 .then(res => res.text())
-                .then(html => {
-                    myItemsContainerElement.innerHTML = html;
-                    hydrateMyItemsTable();
-                })
+                .then(html => renderCurrentTable(html));
         });
     });
 }

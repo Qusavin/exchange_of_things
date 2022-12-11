@@ -22,7 +22,7 @@
         <c:forEach items="${items}" var="item">
             <tr class="table-row bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <td class="p-4 w-32">
-                    <img src="https://flowbite.com/docs/images/products/apple-watch.png" alt="Apple Watch">
+                    <img src="${item.getImage()}" alt="Item image">
                 </td>
                 <td class="hidden thing-id py-4 px-6 font-semibold">
                         ${item.getId()}
@@ -39,9 +39,9 @@
                 <td class="py-4 px-6">
                     <div class="flex flex-col justify-center space-y-2">
                         <button type="button"
-                                class="exchange text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-2.5 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-                            Add to Exchange
-                        </button>
+                                class="exchange text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 disabled:cursor-not-allowed focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-2.5 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 disabled:hover:bg-gray-200 disabled:bg-gray-200"
+                            ${item.getAvailable() ? "disabled" : ""}
+                        >Add to Exchange</button>
                         <button type="button"
                                 class="remove text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-2.5 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                             Remove

@@ -1,10 +1,12 @@
 package ru.rsreu.exchangeofthings.command;
 
+import ru.rsreu.exchangeofthings.constant.FormParam;
 import ru.rsreu.exchangeofthings.database.entity.Item;
 import ru.rsreu.exchangeofthings.enums.Jsp;
 import ru.rsreu.exchangeofthings.enums.UserPanelTablePart;
 import ru.rsreu.exchangeofthings.service.ItemService;
 import ru.rsreu.exchangeofthings.service.ServiceFactory;
+import ru.rsreu.exchangeofthings.service.UserService;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,17 +16,20 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ru.rsreu.exchangeofthings.constant.FormParam.*;
 import static ru.rsreu.exchangeofthings.constant.RequestAttribute.ITEMS_ATTR;
 import static ru.rsreu.exchangeofthings.constant.RequestParam.*;
 
 public class UserPanelCommand extends FrontCommand {
     private ItemService itemService;
+    private UserService userService;
 
     @Override
     public void init(ServletContext servletContext, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
         super.init(servletContext, servletRequest, servletResponse);
 
         itemService = ServiceFactory.getItemService();
+        userService = ServiceFactory.getUserService();
     }
 
     @Override
@@ -33,7 +38,6 @@ public class UserPanelCommand extends FrontCommand {
 
         if (userPanelTableTypeAsString == null) {
             renderPage();
-
             return;
         }
 
@@ -50,10 +54,30 @@ public class UserPanelCommand extends FrontCommand {
                 request.getParameter(USER_PANEL_TABLE_PART).toUpperCase()
         );
 
+        addItem(tablePart);
         removeItem(tablePart);
-        addItemToExchange(tablePart);
+        toggleItemExchange(tablePart);
 
         renderTablePart(tablePart);
+    }
+
+    private void addItem(UserPanelTablePart tablePart) {
+        if (tablePart == UserPanelTablePart.MY_ITEMS && request.getParameter(USER_PANEL_ADD_ITEM) != null) {
+            String title = request.getParameter(TITLE);
+            String imageUrl = request.getParameter(IMAGE_URL);
+            String category = request.getParameter(CATEGORY);
+            String description = request.getParameter(CATEGORY);
+
+            Item item = new Item(
+                    title,
+                    imageUrl,
+                    category,
+                    description,
+                    userService.findById(1)
+            );
+
+            itemService.save(item);
+        }
     }
 
     private void removeItem(UserPanelTablePart tablePart) {
@@ -69,7 +93,7 @@ public class UserPanelCommand extends FrontCommand {
         }
     }
 
-    private void addItemToExchange(UserPanelTablePart tablePart) {
+    private void toggleItemExchange(UserPanelTablePart tablePart) {
         String exchangeItemId = request.getParameter(USER_PANEL_EXCHANGE_ITEM_ID);
 
         if (
@@ -105,7 +129,9 @@ public class UserPanelCommand extends FrontCommand {
     }
 
     private void exchangeItems() throws ServletException, IOException {
-        List<Item> items = itemService.findAvailableItems();
+        List<Item> items = itemService.findAvailableItems().stream()
+                .filter(item -> item.getOwner().getId() != 1)
+                .collect(Collectors.toList());
 
         request.setAttribute(ITEMS_ATTR, items);
 
