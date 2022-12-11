@@ -1,5 +1,6 @@
 package ru.rsreu.exchangeofthings.service;
 
+import ru.rsreu.exchangeofthings.service.impl.ExchangeRequestServiceImpl;
 import ru.rsreu.exchangeofthings.service.impl.ItemServiceImpl;
 import ru.rsreu.exchangeofthings.service.impl.SessionServiceImpl;
 import ru.rsreu.exchangeofthings.service.impl.UserServiceImpl;
@@ -18,5 +19,9 @@ public class ServiceFactory {
 
     public static ItemService getItemService() {
         return ItemServiceImpl.getInstance();
+    }
+
+    public static ExchangeRequestService getExchangeRequestService() {
+        return ExchangeRequestServiceImpl.getInstance();
     }
 }

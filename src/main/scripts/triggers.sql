@@ -25,3 +25,12 @@ SELECT items_seq.nextval
 INTO :new.id
 FROM dual;
 END;
+
+CREATE OR REPLACE TRIGGER exchange_requests_on_insert
+  BEFORE INSERT ON exchange_requests
+  FOR EACH ROW
+BEGIN
+SELECT exchange_requests_seq.nextval
+INTO :new.id
+FROM dual;
+END;
