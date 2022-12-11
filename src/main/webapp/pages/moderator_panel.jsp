@@ -6,7 +6,7 @@
 <%
     List<Link> links = new ArrayList<>();
 
-    links.add(new Link("Moderator Panel", "moderator_panel"));
+    links.add(new Link("Moderator Panel", "moderator-panel"));
     request.setAttribute("links", links);
 %>
 

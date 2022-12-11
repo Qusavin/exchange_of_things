@@ -13,7 +13,7 @@ public enum Route {
         this.route = route;
     }
 
-    public String getRoute() {
+    public String getPath() {
         return this.route;
     }
 }

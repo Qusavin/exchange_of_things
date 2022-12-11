@@ -6,7 +6,7 @@
 <%
     List<Link> links = new ArrayList<>();
 
-    links.add(new Link("Admin Panel", "admin_panel"));
+    links.add(new Link("Admin Panel", "admin-panel"));
     request.setAttribute("links", links);
 %>
 

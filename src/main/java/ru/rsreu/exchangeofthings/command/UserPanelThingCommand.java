@@ -5,9 +5,9 @@ import ru.rsreu.exchangeofthings.enums.Jsp;
 import javax.servlet.ServletException;
 import java.io.IOException;
 
-public class LoginCommand extends FrontCommand {
+public class UserPanelThingCommand extends FrontCommand {
     @Override
     public void process() throws ServletException, IOException {
-        forward(Jsp.LOGIN);
+        forward(Jsp.USER_PANEL_THING);
     }
 }

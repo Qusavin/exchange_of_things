@@ -5,4 +5,5 @@
         document.documentElement.classList.remove('dark')
     }
 </script>
-<script src="../js/theme-switcher.js"></script>
+<script type="module" src="../js/shared/theme-switcher.mjs"></script>
+<script type="module" src="../js/pages/user-panel.mjs"></script>

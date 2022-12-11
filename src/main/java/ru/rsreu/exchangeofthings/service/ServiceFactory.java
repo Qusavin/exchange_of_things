@@ -8,15 +8,15 @@ public class ServiceFactory {
     private ServiceFactory() {
     }
 
-    public UserService getUserService() {
+    public static UserService getUserService() {
         return UserServiceImpl.getInstance();
     }
 
-    public SessionService getSessionService() {
+    public static SessionService getSessionService() {
         return SessionServiceImpl.getInstance();
     }
 
-    public ItemService getItemService() {
+    public static ItemService getItemService() {
         return ItemServiceImpl.getInstance();
     }
 }

@@ -6,7 +6,7 @@
 <%
     List<Link> links = new ArrayList<>();
 
-    links.add(new Link("Moderator Panel", "moderator_panel"));
+    links.add(new Link("User Panel", "user-panel"));
     request.setAttribute("links", links);
 %>
 
@@ -61,19 +61,19 @@
                  id="my-things"
                  role="tabpanel"
                  aria-labelledby="my-things-tab">
-                <%@include file="user-panel/things_table.jsp" %>
+                <%@include file="user-panel/my_things_table.jsp" %>
             </div>
             <div class="hidden rounded-lg"
                  id="my-things-on-exchange"
                  role="tabpanel"
                  aria-labelledby="my-things-on-exchange-tab">
-                <%@include file="user-panel/things_table.jsp" %>
+                <%@include file="user-panel/my_things_table.jsp" %>
             </div>
             <div class="hidden rounded-lg"
                  id="things-on-exchange"
                  role="tabpanel"
                  aria-labelledby="things-on-exchange-tab">
-                <%@include file="user-panel/things_table.jsp" %>
+                <%@include file="user-panel/my_things_table.jsp" %>
             </div>
         </div>
     </div>

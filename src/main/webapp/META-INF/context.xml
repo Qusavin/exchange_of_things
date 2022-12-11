@@ -2,13 +2,13 @@
 <Context>
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
 
-    <Resource name="jdbc/yarik"
+    <Resource name="jdbc/exchangeofthings"
               auth="Container"
-              username="username"
-              password="12345"
+              username="exchangeofthings"
+              password="1234"
               type="javax.sql.DataSource"
               driverClassName="oracle.jdbc.driver.OracleDriver"
-              url="jdbc:oracle:thin:@localhost:1521/xe"
+              url="jdbc:oracle:thin:@localhost:1521:XE"
               maxActive="10"
               maxIdle="4"/>
 </Context>

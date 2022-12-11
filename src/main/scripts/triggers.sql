@@ -17,15 +17,6 @@ INTO :new.id
 FROM dual;
 END;
 
-CREATE OR REPLACE TRIGGER exchange_statuses_on_insert
-  BEFORE INSERT ON exchange_statuses
-  FOR EACH ROW
-BEGIN
-SELECT exchange_statuses_seq.nextval
-INTO :new.id
-FROM dual;
-END;
-
 CREATE OR REPLACE TRIGGER items_on_insert
   BEFORE INSERT ON items
   FOR EACH ROW

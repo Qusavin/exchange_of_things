@@ -1,6 +1,7 @@
 package ru.rsreu.exchangeofthings.handler;
 
-import ru.rsreu.exchangeofthings.util.UrlUtil;
+import ru.rsreu.exchangeofthings.enums.Jsp;
+import ru.rsreu.exchangeofthings.enums.Route;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -23,14 +24,13 @@ public abstract class Router {
         this.response = servletResponse;
     }
 
-    protected void forward(String page) throws ServletException, IOException {
-        String pageUrl = UrlUtil.getPageUrl(page);
-        RequestDispatcher dispatcher = context.getRequestDispatcher(pageUrl);
+    protected void forward(Jsp page) throws ServletException, IOException {
+        RequestDispatcher dispatcher = context.getRequestDispatcher(page.getRoute());
 
         dispatcher.forward(request, response);
     }
 
-    protected void redirect(String url) throws IOException {
-        response.sendRedirect(url);
+    protected void redirect(Route route) throws IOException {
+        response.sendRedirect(route.getPath());
     }
 }
