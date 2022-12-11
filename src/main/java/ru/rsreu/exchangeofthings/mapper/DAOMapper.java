@@ -1,5 +1,6 @@
 package ru.rsreu.exchangeofthings.mapper;
 
+import ru.rsreu.exchangeofthings.database.entity.ExchangeRequest;
 import ru.rsreu.exchangeofthings.database.entity.Item;
 import ru.rsreu.exchangeofthings.database.entity.Session;
 import ru.rsreu.exchangeofthings.database.entity.User;
@@ -64,6 +65,48 @@ public class DAOMapper {
                 resultSet.getString("category"),
                 resultSet.getBoolean("is_available"),
                 null
+        );
+    }
+
+    public static ExchangeRequest mapExchangeRequest(ResultSet resultSet) throws SQLException {
+        return new ExchangeRequest(
+                resultSet.getInt("id"),
+                new Item(
+                        resultSet.getInt("id_1"),
+                        resultSet.getString("title"),
+                        resultSet.getString("description"),
+                        resultSet.getString("image"),
+                        resultSet.getInt("views_number"),
+                        resultSet.getString("category"),
+                        resultSet.getBoolean("is_available"),
+                        new User(
+                                resultSet.getInt("id_3"),
+                                resultSet.getString("username"),
+                                resultSet.getString("password"),
+                                resultSet.getString("name"),
+                                resultSet.getBoolean("is_blocked"),
+                                resultSet.getString("role")
+                        )
+                ),
+                new Item(
+                        resultSet.getInt("id_2"),
+                        resultSet.getString("title_1"),
+                        resultSet.getString("description_1"),
+                        resultSet.getString("image_1"),
+                        resultSet.getInt("views_number_1"),
+                        resultSet.getString("category_1"),
+                        resultSet.getBoolean("is_available_1"),
+                        new User(
+                                resultSet.getInt("id_4"),
+                                resultSet.getString("username_1"),
+                                resultSet.getString("password_1"),
+                                resultSet.getString("name_1"),
+                                resultSet.getBoolean("is_blocked_1"),
+                                resultSet.getString("role_1")
+                        )
+                ),
+                resultSet.getString("status"),
+                resultSet.getDate("exchange_date")
         );
     }
 }

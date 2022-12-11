@@ -79,6 +79,7 @@ ALTER TABLE items
 -- Создание таблицы Заявки на обмен
 CREATE TABLE exchange_requests
 (
+    id NUMBER NOT NULL,
     receiver_item_id NUMBER NOT NULL,
     sender_item_id NUMBER NOT NULL,
     status VARCHAR2 (50 CHAR) DEFAULT 'In process' NOT NULL,
@@ -88,8 +89,11 @@ CREATE TABLE exchange_requests
 -- Первичный ключ таблицы Заявки на обмен
 ALTER TABLE exchange_requests
     ADD (
-    CONSTRAINT exchange_requests_pk PRIMARY KEY (receiver_item_id, sender_item_id, status)
+    CONSTRAINT exchange_requests_pk PRIMARY KEY (id)
   );
+
+-- Создание последовательности для автогенерации первичного ключа
+CREATE SEQUENCE exchange_requests_seq START WITH 1;
 
 -- Создание внешнего ключа на таблицу Вещи
 ALTER TABLE exchange_requests
