@@ -3,6 +3,7 @@ package ru.rsreu.exchangeofthings.dao.impl;
 import ru.rsreu.exchangeofthings.dao.AbstractDAO;
 import ru.rsreu.exchangeofthings.dao.ExchangeRequestDAO;
 import ru.rsreu.exchangeofthings.database.entity.ExchangeRequest;
+import ru.rsreu.exchangeofthings.database.entity.Item;
 import ru.rsreu.exchangeofthings.mapper.DAOMapper;
 
 import java.sql.Date;
@@ -66,12 +67,13 @@ public class ExchangeRequestDAOImpl extends AbstractDAO implements ExchangeReque
     }
 
     @Override
-    public void updateStatus(int id, String status) {
+    public void updateStatus(Item senItem, Item recItem, String status) {
         String query = resourcer.getString("query.exchange.update");
 
         try (PreparedStatement st = connection.prepareStatement(query)) {
             st.setString(1, status);
-            st.setInt(2, id);
+            st.setInt(2, senItem.getId());
+            st.setInt(3, recItem.getId());
 
             st.executeUpdate();
         } catch (SQLException e) {

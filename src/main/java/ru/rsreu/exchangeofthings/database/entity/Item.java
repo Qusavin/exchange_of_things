@@ -10,6 +10,10 @@ public class Item {
     private Boolean isAvailable;
     private User owner;
 
+    public Item(Integer id) {
+        this.id = id;
+    }
+
     public Item(String title, String image, String category, String description, User owner) {
         this.title = title;
         this.image = image;

@@ -17,4 +17,6 @@ public interface ItemDAO {
     void deleteById(int id);
 
     void updateIsAvailable(int id);
+
+    void updateOwner(int itemId, int ownerId);
 }

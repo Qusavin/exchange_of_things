@@ -1,9 +1,12 @@
 package ru.rsreu.exchangeofthings.command;
 
 import ru.rsreu.exchangeofthings.constant.FormParam;
+import ru.rsreu.exchangeofthings.database.entity.ExchangeRequest;
 import ru.rsreu.exchangeofthings.database.entity.Item;
 import ru.rsreu.exchangeofthings.enums.Jsp;
+import ru.rsreu.exchangeofthings.enums.Status;
 import ru.rsreu.exchangeofthings.enums.UserPanelTablePart;
+import ru.rsreu.exchangeofthings.service.ExchangeRequestService;
 import ru.rsreu.exchangeofthings.service.ItemService;
 import ru.rsreu.exchangeofthings.service.ServiceFactory;
 import ru.rsreu.exchangeofthings.service.UserService;
@@ -17,12 +20,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static ru.rsreu.exchangeofthings.constant.FormParam.*;
-import static ru.rsreu.exchangeofthings.constant.RequestAttribute.ITEMS_ATTR;
+import static ru.rsreu.exchangeofthings.constant.RequestAttribute.EXCHANGE_REQUESTS;
+import static ru.rsreu.exchangeofthings.constant.RequestAttribute.ITEMS;
 import static ru.rsreu.exchangeofthings.constant.RequestParam.*;
 
 public class UserPanelCommand extends FrontCommand {
     private ItemService itemService;
     private UserService userService;
+    private ExchangeRequestService exchangeRequestService;
 
     @Override
     public void init(ServletContext servletContext, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
@@ -30,6 +35,7 @@ public class UserPanelCommand extends FrontCommand {
 
         itemService = ServiceFactory.getItemService();
         userService = ServiceFactory.getUserService();
+        exchangeRequestService = ServiceFactory.getExchangeRequestService();
     }
 
     @Override
@@ -73,7 +79,7 @@ public class UserPanelCommand extends FrontCommand {
                     imageUrl,
                     category,
                     description,
-                    userService.findById(1)
+                    userService.findById(2)
             );
 
             itemService.save(item);
@@ -121,36 +127,40 @@ public class UserPanelCommand extends FrontCommand {
     }
 
     private void renderPage() throws ServletException, IOException {
-        List<Item> items = itemService.findByOwnerId(1);
+        List<Item> items = itemService.findByOwnerId(2);
+        List<ExchangeRequest> exchangeRequests = exchangeRequestService.findByReceiverIdAndStatus(
+                2, Status.IN_PROCESS.getValue()
+        );
 
-        request.setAttribute(ITEMS_ATTR, items);
+        request.setAttribute(ITEMS, items);
+        request.setAttribute(EXCHANGE_REQUESTS, exchangeRequests);
 
         forward(Jsp.USER_PANEL);
     }
 
     private void exchangeItems() throws ServletException, IOException {
         List<Item> items = itemService.findAvailableItems().stream()
-                .filter(item -> item.getOwner().getId() != 1)
+                .filter(item -> item.getOwner().getId() != 2)
                 .collect(Collectors.toList());
 
-        request.setAttribute(ITEMS_ATTR, items);
+        request.setAttribute(ITEMS, items);
 
         forward(Jsp.USER_PANEL_EXCHANGE_ITEMS);
     }
 
     private void myItems() throws ServletException, IOException {
-        List<Item> items = itemService.findByOwnerId(1);
+        List<Item> items = itemService.findByOwnerId(2);
 
-        request.setAttribute(ITEMS_ATTR, items);
+        request.setAttribute(ITEMS, items);
 
         forward(Jsp.USER_PANEL_ITEMS);
     }
 
     private void myExchangeItems() throws ServletException, IOException {
-        List<Item> items = itemService.findByOwnerId(1).stream()
+        List<Item> items = itemService.findByOwnerId(2).stream()
                 .filter(Item::getAvailable).collect(Collectors.toList());
 
-        request.setAttribute(ITEMS_ATTR, items);
+        request.setAttribute(ITEMS, items);
 
         forward(Jsp.USER_PANEL_MY_EXCHANGE_ITEMS);
     }

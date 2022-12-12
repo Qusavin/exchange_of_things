@@ -98,7 +98,7 @@ function hydrateExchangeItemsTable() {
         const openBtnElement = tableRowElement.querySelector('.open');
 
         requestExchangeBtnElement.addEventListener('click', () => {
-            redirect(`user-panel/exchange?item_id=${itemId}`);
+            redirect(`user-panel/exchange?rec_item_id=${itemId}`);
         });
         openBtnElement.addEventListener('click', () => {
             redirect(`user-panel/thing?item_id=${itemId}`);

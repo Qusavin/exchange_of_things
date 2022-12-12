@@ -120,6 +120,20 @@ public class ItemDAOImpl extends AbstractDAO implements ItemDAO {
     }
 
     @Override
+    public void updateOwner(int itemId, int ownerId) {
+        String query = resourcer.getString("query.item.update.owner");
+
+        try (PreparedStatement st = connection.prepareStatement(query)) {
+            st.setInt(1, ownerId);
+            st.setInt(2, itemId);
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void updateIsAvailable(int id) {
         Item item = findById(id)
                 .orElseThrow(() -> new RuntimeException());

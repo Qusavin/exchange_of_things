@@ -1,6 +1,7 @@
 package ru.rsreu.exchangeofthings.dao;
 
 import ru.rsreu.exchangeofthings.database.entity.ExchangeRequest;
+import ru.rsreu.exchangeofthings.database.entity.Item;
 
 import java.util.List;
 
@@ -11,5 +12,5 @@ public interface ExchangeRequestDAO {
 
     void deleteById(int id);
 
-    void updateStatus(int id, String status);
+    void updateStatus(Item senItem, Item recItem, String status);
 }

@@ -4,30 +4,38 @@
     <div class="container mx-auto xl:max-w-7xl flex items-center justify-between">
         <div class="text-lg font-medium">Exchange of things</div>
         <div class="flex items-center">
-            <button id="dropdown-notification-btn" data-dropdown-toggle="dropdownNotification" class="inline-flex items-center text-sm font-medium text-center text-white focus:outline-none" type="button">
-                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path></svg>
+            <button id="dropdown-notification-btn" data-dropdown-toggle="dropdownNotification"
+                    class="inline-flex items-center text-sm font-medium text-center text-white focus:outline-none"
+                    type="button">
+                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+                </svg>
                 <div class="flex relative">
                     <div class="inline-flex relative -top-2 right-3 w-3 h-3 bg-red-500 rounded-full border-2 border-purple-500 dark:border-purple-900"></div>
                 </div>
             </button>
             <!-- Dropdown menu -->
-            <div id="dropdownNotification" class="hidden z-20 w-full max-w-sm bg-white rounded overflow-hidden divide-y divide-gray-100 shadow dark:bg-gray-800 dark:divide-gray-700" aria-labelledby="dropdown-notification-btn">
+            <div id="dropdownNotification"
+                 class="hidden z-20 w-full max-w-sm bg-white rounded overflow-hidden divide-y divide-gray-100 shadow dark:bg-gray-800 dark:divide-gray-700"
+                 aria-labelledby="dropdown-notification-btn">
                 <div class="block py-2 px-4 font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-800 dark:text-white">
                     Notifications
                 </div>
                 <div class="divide-y divide-gray-100 dark:divide-gray-700">
-                    <a href="#" class="flex py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <div class="pl-3 w-full">
-                            <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span class="font-semibold text-gray-900 dark:text-white">Jese Leos</span>: "Hey, what's up? All set for the presentation?"</div>
-                            <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
-                        </div>
-                    </a>
-                    <a href="#" class="flex py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <div class="pl-3 w-full">
-                            <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from <span class="font-semibold text-gray-900 dark:text-white">Jese Leos</span>: "Hey, what's up? All set for the presentation?"</div>
-                            <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
-                        </div>
-                    </a>
+                    <c:forEach items="${exchangeRequests}" var="exchangeRequest">
+                        <a href="user-panel/exchange?sen_item_id=${exchangeRequest.getReceiverItem().getId()}&rec_item_id=${exchangeRequest.getSenderItem().getId()}"
+                           class="flex py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <div class="pl-3 w-full">
+                                <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
+                                    Request to exchange your <span
+                                        class="font-semibold">${exchangeRequest.getReceiverItem().getTitle()}</span>
+                                    to <span
+                                        class="font-semibold">${exchangeRequest.getSenderItem().getTitle()}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </c:forEach>
                 </div>
             </div>
 

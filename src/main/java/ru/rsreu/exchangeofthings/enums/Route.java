@@ -2,10 +2,10 @@ package ru.rsreu.exchangeofthings.enums;
 
 public enum Route {
     LOGIN("login"),
-    ADMIN_PANEL("admin_panel"),
-    USER_PANEL("user_panel"),
-    MODERATOR_PANEL("moderator_panel"),
-    NOT_FOUND("not_found");
+    ADMIN_PANEL("admin-panel"),
+    USER_PANEL("user-panel"),
+    MODERATOR_PANEL("moderator-panel"),
+    NOT_FOUND("not-found");
 
     private final String route;
 

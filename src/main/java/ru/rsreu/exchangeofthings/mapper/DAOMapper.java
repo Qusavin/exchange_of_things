@@ -70,43 +70,39 @@ public class DAOMapper {
 
     public static ExchangeRequest mapExchangeRequest(ResultSet resultSet) throws SQLException {
         return new ExchangeRequest(
-                resultSet.getInt("id"),
+                resultSet.getInt("e_id"),
                 new Item(
-                        resultSet.getInt("id_1"),
-                        resultSet.getString("title"),
-                        resultSet.getString("description"),
-                        resultSet.getString("image"),
-                        resultSet.getInt("views_number"),
-                        resultSet.getString("category"),
-                        resultSet.getBoolean("is_available"),
+                        resultSet.getInt("rec_i_id"),
+                        resultSet.getString("rec_i_title"),
+                        resultSet.getString("rec_i_description"),
+                        resultSet.getString("rec_i_image"),
+                        resultSet.getInt("rec_i_views_number"),
+                        resultSet.getString("rec_i_category"),
+                        resultSet.getBoolean("rec_i_is_available"),
                         new User(
-                                resultSet.getInt("id_3"),
-                                resultSet.getString("username"),
-                                resultSet.getString("password"),
-                                resultSet.getString("name"),
-                                resultSet.getBoolean("is_blocked"),
-                                resultSet.getString("role")
+                                resultSet.getInt("rec_u_id"),
+                                resultSet.getString("rec_u_username"),
+                                resultSet.getString("rec_u_name"),
+                                resultSet.getString("rec_u_role")
                         )
                 ),
                 new Item(
-                        resultSet.getInt("id_2"),
-                        resultSet.getString("title_1"),
-                        resultSet.getString("description_1"),
-                        resultSet.getString("image_1"),
-                        resultSet.getInt("views_number_1"),
-                        resultSet.getString("category_1"),
-                        resultSet.getBoolean("is_available_1"),
+                        resultSet.getInt("sen_i_id"),
+                        resultSet.getString("sen_i_title"),
+                        resultSet.getString("sen_i_description"),
+                        resultSet.getString("sen_i_image"),
+                        resultSet.getInt("sen_i_views_number"),
+                        resultSet.getString("sen_i_category"),
+                        resultSet.getBoolean("sen_i_is_available"),
                         new User(
-                                resultSet.getInt("id_4"),
-                                resultSet.getString("username_1"),
-                                resultSet.getString("password_1"),
-                                resultSet.getString("name_1"),
-                                resultSet.getBoolean("is_blocked_1"),
-                                resultSet.getString("role_1")
+                                resultSet.getInt("sen_u_id"),
+                                resultSet.getString("sen_u_username"),
+                                resultSet.getString("sen_u_name"),
+                                resultSet.getString("sen_u_role")
                         )
                 ),
-                resultSet.getString("status"),
-                resultSet.getDate("exchange_date")
+                resultSet.getString("e_status"),
+                resultSet.getDate("e_exchange_date")
         );
     }
 }

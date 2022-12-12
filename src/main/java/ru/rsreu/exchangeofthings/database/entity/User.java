@@ -27,6 +27,13 @@ public class User {
         this.role = role;
     }
 
+    public User(Integer id, String username, String name, String role) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.role = role;
+    }
+
     public boolean isOnline(Date expiredAt) {
         return expiredAt != null && expiredAt.after(new Date(System.currentTimeMillis()));
     }

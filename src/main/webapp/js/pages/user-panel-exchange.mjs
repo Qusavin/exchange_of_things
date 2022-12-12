@@ -1,4 +1,12 @@
+import {getUrlencodedFormData, redirect} from '../util.mjs';
+
 const exchangeElement = document.querySelector('#exchange');
+
+const Status = {
+    Accepted: 'accepted',
+    Rejected: 'rejected',
+    InProcess: 'in_process'
+};
 
 if (exchangeElement !== null) {
     main();
@@ -7,9 +15,11 @@ if (exchangeElement !== null) {
 function main() {
     const selectOwnItemsElement = document.querySelector('#select-items');
     const allItemsElement = document.querySelector('#all-items');
-    const myItemElement = document.querySelector('#my-item')
-    const otherItemElement = document.querySelector('#other-item');
+    const senItemElement = document.querySelector('#sen-item')
+    const recItemElement = document.querySelector('#rec-item');
     const makeRequestBtnElement = document.querySelector('#make-request');
+    const acceptRequestBtnElement = document.querySelector('#accept-request');
+    const declineRequestBtnElement = document.querySelector('#decline-request');
 
     const ItemSelector = {
         ImageUrl: '.image',
@@ -19,7 +29,7 @@ function main() {
         Category: '.category'
     };
 
-    selectOwnItemsElement.addEventListener('change', () => {
+    selectOwnItemsElement?.addEventListener('change', () => {
         const itemId = selectOwnItemsElement.value.trim();
         const itemElement = allItemsElement.querySelector(`div.item[data-item-id='${itemId}']`);
 
@@ -29,19 +39,37 @@ function main() {
         const viewsNumber = itemElement.querySelector(ItemSelector.ViewsNumber).innerText.trim();
         const category = itemElement.querySelector(ItemSelector.Category).innerText.trim();
 
-        myItemElement.setAttribute('data-item-id', itemId);
-        myItemElement.querySelector(ItemSelector.ImageUrl).src = imageUrl;
-        myItemElement.querySelector(ItemSelector.Title).innerHTML = title;
-        myItemElement.querySelector(ItemSelector.Description).innerHTML = description;
-        myItemElement.querySelector(ItemSelector.ViewsNumber).innerHTML = viewsNumber;
-        myItemElement.querySelector(ItemSelector.Category).innerHTML = category;
+        senItemElement.setAttribute('data-item-id', itemId);
+        senItemElement.querySelector(ItemSelector.ImageUrl).src = imageUrl;
+        senItemElement.querySelector(ItemSelector.Title).innerHTML = title;
+        senItemElement.querySelector(ItemSelector.Description).innerHTML = description;
+        senItemElement.querySelector(ItemSelector.ViewsNumber).innerHTML = viewsNumber;
+        senItemElement.querySelector(ItemSelector.Category).innerHTML = category;
     });
 
-    makeRequestBtnElement.addEventListener('click', () => {
-        const itemId = myItemElement.getAttribute('data-item-id').trim();
-        const otherItemId = otherItemElement.getAttribute('data-item-id').trim();
+    const changeRequestStatus = status => {
+        const senItemId = senItemElement.getAttribute('data-item-id').trim();
+        const recItemId = recItemElement.getAttribute('data-item-id').trim();
 
-        console.log('myItemId', itemId);
-        console.log('otherItemId', otherItemId);
-    });
+        const formData = new FormData();
+
+        formData.set('sen_item_id', senItemId);
+        formData.set('rec_item_id', recItemId);
+        formData.set('status', status);
+
+        fetch('user-panel/exchange', {
+            method: 'post',
+            body: getUrlencodedFormData(formData),
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            }
+        })
+            .then(res => res.text())
+            .then(() => redirect('user-panel'));
+    };
+
+    makeRequestBtnElement?.addEventListener('click', () => changeRequestStatus(Status.InProcess));
+    acceptRequestBtnElement?.addEventListener('click', () => changeRequestStatus(Status.Accepted));
+    declineRequestBtnElement?.addEventListener('click', () => changeRequestStatus(Status.Rejected));
 }

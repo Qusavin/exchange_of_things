@@ -9,6 +9,12 @@ public class ExchangeRequest {
     private String status;
     private Date date;
 
+    public ExchangeRequest(Item receiverItem, Item senderItem, String status) {
+        this.receiverItem = receiverItem;
+        this.senderItem = senderItem;
+        this.status = status;
+    }
+
     public ExchangeRequest(Integer id, Item receiverItem, Item senderItem, String status, Date date) {
         this.id = id;
         this.receiverItem = receiverItem;
