@@ -14,7 +14,9 @@ public enum Jsp {
 
     MODERATOR_PANEL("/pages/moderator_panel.jsp"),
 
-    NOT_FOUND("/pages/not_found.jsp");
+    NOT_FOUND("/pages/not_found.jsp"),
+
+    REDIRECT("/templates/redirect.jsp");
 
     private final String route;
 

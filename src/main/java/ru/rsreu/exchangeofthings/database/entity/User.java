@@ -1,8 +1,9 @@
 package ru.rsreu.exchangeofthings.database.entity;
 
+import java.security.Principal;
 import java.util.Date;
 
-public class User {
+public class User implements Principal {
     private Integer id;
     private String username;
     private String password;

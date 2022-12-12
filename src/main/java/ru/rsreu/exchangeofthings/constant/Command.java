@@ -20,18 +20,16 @@ public class Command {
             Map.entry(USER_PANEL_THING, new UserPanelThingCommand()),
             Map.entry(USER_PANEL_EXCHANGE, new UserPanelExchangeCommand())
     );
-    private static final List<String> commandUrls = new ArrayList<>(
-            Arrays.asList(
-                    ADMIN_PANEL_URL,
+    private static final List<String> commandUrls = Arrays.asList(
+            ADMIN_PANEL_URL,
 
-                    LOGIN_URL,
+            LOGIN_URL,
 
-                    MODERATOR_PANEL_URL,
+            MODERATOR_PANEL_URL,
 
-                    USER_PANEL_EXCHANGE,
-                    USER_PANEL_THING,
-                    USER_PANEL_URL
-            )
+            USER_PANEL_EXCHANGE,
+            USER_PANEL_THING,
+            USER_PANEL_URL
     );
 
     public static FrontCommand getCommand(String url) {

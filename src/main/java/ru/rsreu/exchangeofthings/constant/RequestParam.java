@@ -9,4 +9,10 @@ public class RequestParam {
     public static final String USER_PANEL_SEN_ITEM_ID = "sen_item_id";
     public static final String USER_PANEL_REC_ITEM_ID = "rec_item_id";
     public static final String ITEM_STATUS = "status";
+    public static final String USERNAME = "username";
+    public static final String PASSWORD = "password";
+    public static final String TITLE = "title";
+    public static final String IMAGE_URL = "image_url";
+    public static final String CATEGORY = "category";
+    public static final String DESCRIPTION = "description";
 }

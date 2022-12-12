@@ -5,6 +5,7 @@ import ru.rsreu.exchangeofthings.dao.SessionDAO;
 import ru.rsreu.exchangeofthings.database.entity.Session;
 import ru.rsreu.exchangeofthings.mapper.DAOMapper;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,6 +31,20 @@ public class SessionDAOImpl extends AbstractDAO implements SessionDAO {
         }
 
         return sessions;
+    }
+
+    @Override
+    public void save(Session session) {
+        String query = resourcer.getString("query.session.save");
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setLong(1, session.getUser().getId());
+            statement.setDate(2, new Date(session.getExpiredAt().getTime()));
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static SessionDAOImpl getInstance() {

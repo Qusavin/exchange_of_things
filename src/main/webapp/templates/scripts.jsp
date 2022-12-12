@@ -7,5 +7,6 @@
 </script>
 <script type="module" src="/js/util.mjs"></script>
 <script type="module" src="/js/shared/theme-switcher.mjs"></script>
+<script type="module" src="/js/pages/login.mjs"></script>
 <script type="module" src="/js/pages/user-panel.mjs"></script>
 <script type="module" src="/js/pages/user-panel-exchange.mjs"></script>

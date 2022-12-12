@@ -1,7 +1,8 @@
 package ru.rsreu.exchangeofthings.handler;
 
+import com.google.gson.Gson;
+import ru.rsreu.exchangeofthings.constant.ContentType;
 import ru.rsreu.exchangeofthings.enums.Jsp;
-import ru.rsreu.exchangeofthings.enums.Route;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -9,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public abstract class Router {
     protected ServletContext context;
@@ -30,7 +32,19 @@ public abstract class Router {
         dispatcher.forward(request, response);
     }
 
-    protected void redirect(Route route) throws IOException {
-        response.sendRedirect(route.getPath());
+    protected void json(Object object) throws IOException {
+        json(object, HttpServletResponse.SC_OK);
+    }
+
+    protected void json(Object object, int status) throws IOException {
+        PrintWriter out = response.getWriter();
+        String objectAsString = new Gson().toJson(object);
+
+        response.setContentType(ContentType.JSON);
+        response.setStatus(status);
+        response.setCharacterEncoding("UTF-8");
+
+        out.print(objectAsString);
+        out.flush();
     }
 }

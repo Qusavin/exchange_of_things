@@ -1,6 +1,5 @@
 package ru.rsreu.exchangeofthings.command;
 
-import ru.rsreu.exchangeofthings.constant.FormParam;
 import ru.rsreu.exchangeofthings.database.entity.ExchangeRequest;
 import ru.rsreu.exchangeofthings.database.entity.Item;
 import ru.rsreu.exchangeofthings.enums.Jsp;
@@ -19,7 +18,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ru.rsreu.exchangeofthings.constant.FormParam.*;
 import static ru.rsreu.exchangeofthings.constant.RequestAttribute.EXCHANGE_REQUESTS;
 import static ru.rsreu.exchangeofthings.constant.RequestAttribute.ITEMS;
 import static ru.rsreu.exchangeofthings.constant.RequestParam.*;
@@ -72,7 +70,7 @@ public class UserPanelCommand extends FrontCommand {
             String title = request.getParameter(TITLE);
             String imageUrl = request.getParameter(IMAGE_URL);
             String category = request.getParameter(CATEGORY);
-            String description = request.getParameter(CATEGORY);
+            String description = request.getParameter(DESCRIPTION);
 
             Item item = new Item(
                     title,

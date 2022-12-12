@@ -21,3 +21,20 @@ export function redirect(path) {
 
     window.location.href = url;
 }
+
+export async function makeRequest(url, options) {
+    const body = options.body ?? {};
+    const method = options.method ?? 'get';
+
+    const response = await fetch(url, {
+        method,
+        body,
+        credentials: 'same-origin',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    });
+
+    const status = response.status;
+    const data = await response.json();
+
+    return {status, data};
+}

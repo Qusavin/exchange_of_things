@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface SessionDAO {
     List<Session> findAll();
+
+    void save(Session session);
 }
