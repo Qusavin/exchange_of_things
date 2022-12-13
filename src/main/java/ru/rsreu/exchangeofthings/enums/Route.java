@@ -2,6 +2,7 @@ package ru.rsreu.exchangeofthings.enums;
 
 public enum Route {
     LOGIN("login"),
+    LOGOUT("logout"),
     ADMIN_PANEL("admin-panel"),
     USER_PANEL_THING("user-panel/thing"),
     USER_PANEL_EXCHANGE("user-panel/exchange"),

@@ -7,6 +7,7 @@ import java.util.*;
 public class Command {
     private static final String ADMIN_PANEL_URL = "/admin-panel";
     private static final String LOGIN_URL = "/login";
+    private static final String LOGOUT_URL = "/logout";
     private static final String MODERATOR_PANEL_URL = "/moderator-panel";
     private static final String USER_PANEL_THING = "/user-panel/thing";
     private static final String USER_PANEL_EXCHANGE = "/user-panel/exchange";
@@ -15,6 +16,7 @@ public class Command {
     private static final Map<String, FrontCommand> commands = Map.ofEntries(
             Map.entry(ADMIN_PANEL_URL, new AdminPanelCommand()),
             Map.entry(LOGIN_URL, new LoginCommand()),
+            Map.entry(LOGOUT_URL, new LogoutCommand()),
             Map.entry(MODERATOR_PANEL_URL, new ModeratorPanelCommand()),
             Map.entry(USER_PANEL_URL, new UserPanelCommand()),
             Map.entry(USER_PANEL_THING, new UserPanelThingCommand()),
@@ -24,6 +26,7 @@ public class Command {
             ADMIN_PANEL_URL,
 
             LOGIN_URL,
+            LOGOUT_URL,
 
             MODERATOR_PANEL_URL,
 

@@ -20,7 +20,6 @@ function main() {
         if (!usernameErrorElement.classList.contains(hiddenClass)) {
             usernameErrorElement.classList.add(hiddenClass);
         }
-
     });
 
     passwordElement.addEventListener('input', () => {

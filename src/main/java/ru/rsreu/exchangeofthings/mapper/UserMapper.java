@@ -19,6 +19,7 @@ public class UserMapper {
                 user.getUsername(),
                 user.getPassword(),
                 user.getName(),
+                user.getBlocked(),
                 user.isOnline(session.getExpiredAt()),
                 user.getRole()
         );

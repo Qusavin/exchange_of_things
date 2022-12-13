@@ -55,12 +55,72 @@ function main() {
 
     hydrateMyItemsTable();
 
+    const hiddenClass = 'hidden';
     const addThingFormElement = document.querySelector('#add-thing-form');
+
+    const addThingModalCloseElement = document.querySelector('#add-thing-modal-close');
+
+    const addTitleElement = document.querySelector('#add-title');
+    const addImageUrlElement = document.querySelector('#add-image-url');
+    const addCategoryElement = document.querySelector('#add-category');
+    const addDescriptionElement = document.querySelector('#add-description');
+
+    const addTitleErrorElement = document.querySelector('#add-title-error');
+    const addImageUrlErrorElement = document.querySelector('#add-image-url-error');
+    const addCategoryErrorElement = document.querySelector('#add-category-error');
+    const addDescriptionErrorElement = document.querySelector('#add-description-error');
+
+    addTitleElement.addEventListener('input', () => {
+        if (!addTitleErrorElement.classList.contains(hiddenClass)) {
+            addTitleErrorElement.classList.add(hiddenClass);
+        }
+    });
+    addImageUrlElement.addEventListener('input', () => {
+        if (!addImageUrlErrorElement.classList.contains(hiddenClass)) {
+            addImageUrlErrorElement.classList.add(hiddenClass);
+        }
+    });
+    addCategoryElement.addEventListener('input', () => {
+        if (!addCategoryErrorElement.classList.contains(hiddenClass)) {
+            addCategoryErrorElement.classList.add(hiddenClass);
+        }
+    });
+    addDescriptionElement.addEventListener('input', () => {
+        if (!addDescriptionErrorElement.classList.contains(hiddenClass)) {
+            addDescriptionErrorElement.classList.add(hiddenClass);
+        }
+    });
 
     addThingFormElement.addEventListener('submit', e => {
         e.preventDefault();
 
         const formData = new FormData(addThingFormElement);
+
+        let formValid = true;
+
+        if (addTitleElement.value.trim() === '') {
+            addTitleErrorElement.classList.remove(hiddenClass);
+            formValid = false;
+        }
+
+        if (addImageUrlElement.value.trim() === '') {
+            addImageUrlErrorElement.classList.remove(hiddenClass);
+            formValid = false;
+        }
+
+        if (addCategoryElement.value.trim() === '') {
+            addCategoryErrorElement.classList.remove(hiddenClass);
+            formValid = false;
+        }
+
+        if (addDescriptionElement.value.trim() === '') {
+            addDescriptionErrorElement.classList.remove(hiddenClass);
+            formValid = false;
+        }
+
+        if (!formValid) {
+            return;
+        }
 
         fetch(`user-panel?table_part=${currentTable}&add_item=true`, {
             method: 'post',
@@ -72,6 +132,7 @@ function main() {
         })
             .then(res => res.text())
             .then(html => renderCurrentTable(html));
+        addThingModalCloseElement.click();
     });
 }
 

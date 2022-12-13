@@ -46,8 +46,11 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
         recItem = itemDAO.findById(recItemId).orElseThrow(RuntimeException::new);
 
         exchangeRequestDAO.updateStatus(senItem, recItem, status.getValue());
-        itemDAO.updateOwner(senItem.getId(), recItem.getOwner().getId());
-        itemDAO.updateOwner(recItem.getId(), senItem.getOwner().getId());
+
+        if (status == Status.ACCEPTED) {
+            itemDAO.updateOwner(senItem.getId(), recItem.getOwner().getId());
+            itemDAO.updateOwner(recItem.getId(), senItem.getOwner().getId());
+        }
     }
 
     @Override

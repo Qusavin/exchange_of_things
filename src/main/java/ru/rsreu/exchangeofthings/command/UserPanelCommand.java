@@ -2,6 +2,7 @@ package ru.rsreu.exchangeofthings.command;
 
 import ru.rsreu.exchangeofthings.database.entity.ExchangeRequest;
 import ru.rsreu.exchangeofthings.database.entity.Item;
+import ru.rsreu.exchangeofthings.database.entity.User;
 import ru.rsreu.exchangeofthings.enums.Jsp;
 import ru.rsreu.exchangeofthings.enums.Status;
 import ru.rsreu.exchangeofthings.enums.UserPanelTablePart;
@@ -9,6 +10,7 @@ import ru.rsreu.exchangeofthings.service.ExchangeRequestService;
 import ru.rsreu.exchangeofthings.service.ItemService;
 import ru.rsreu.exchangeofthings.service.ServiceFactory;
 import ru.rsreu.exchangeofthings.service.UserService;
+import ru.rsreu.exchangeofthings.util.UserUtil;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -26,11 +28,13 @@ public class UserPanelCommand extends FrontCommand {
     private ItemService itemService;
     private UserService userService;
     private ExchangeRequestService exchangeRequestService;
+    private User user;
 
     @Override
     public void init(ServletContext servletContext, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
         super.init(servletContext, servletRequest, servletResponse);
 
+        user = UserUtil.getFromRequest(request).orElseThrow(RuntimeException::new);
         itemService = ServiceFactory.getItemService();
         userService = ServiceFactory.getUserService();
         exchangeRequestService = ServiceFactory.getExchangeRequestService();
@@ -77,7 +81,7 @@ public class UserPanelCommand extends FrontCommand {
                     imageUrl,
                     category,
                     description,
-                    userService.findById(2)
+                    userService.findById(user.getId())
             );
 
             itemService.save(item);
@@ -125,9 +129,9 @@ public class UserPanelCommand extends FrontCommand {
     }
 
     private void renderPage() throws ServletException, IOException {
-        List<Item> items = itemService.findByOwnerId(2);
+        List<Item> items = itemService.findByOwnerId(user.getId());
         List<ExchangeRequest> exchangeRequests = exchangeRequestService.findByReceiverIdAndStatus(
-                2, Status.IN_PROCESS.getValue()
+                user.getId(), Status.IN_PROCESS.getValue()
         );
 
         request.setAttribute(ITEMS, items);
@@ -138,7 +142,7 @@ public class UserPanelCommand extends FrontCommand {
 
     private void exchangeItems() throws ServletException, IOException {
         List<Item> items = itemService.findAvailableItems().stream()
-                .filter(item -> item.getOwner().getId() != 2)
+                .filter(item -> !item.getOwner().getId().equals(user.getId()))
                 .collect(Collectors.toList());
 
         request.setAttribute(ITEMS, items);
@@ -147,7 +151,7 @@ public class UserPanelCommand extends FrontCommand {
     }
 
     private void myItems() throws ServletException, IOException {
-        List<Item> items = itemService.findByOwnerId(2);
+        List<Item> items = itemService.findByOwnerId(user.getId());
 
         request.setAttribute(ITEMS, items);
 
@@ -155,7 +159,7 @@ public class UserPanelCommand extends FrontCommand {
     }
 
     private void myExchangeItems() throws ServletException, IOException {
-        List<Item> items = itemService.findByOwnerId(2).stream()
+        List<Item> items = itemService.findByOwnerId(user.getId()).stream()
                 .filter(Item::getAvailable).collect(Collectors.toList());
 
         request.setAttribute(ITEMS, items);

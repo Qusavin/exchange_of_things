@@ -5,7 +5,7 @@
     <title>Login</title>
 </head>
 <body id="login-page" class="dark:bg-slate-500">
-    <%@include file="../templates/header.jsp" %>
+    <%@include file="../templates/header-unauth.jsp" %>
     <div class="container mx-auto pt-14">
         <form id="login-form" class="p-4 w-full max-w-sm mx-auto mt-2 border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
             <div class="mb-6">

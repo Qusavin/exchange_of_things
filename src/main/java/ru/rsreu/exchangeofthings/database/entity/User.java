@@ -19,6 +19,13 @@ public class User implements Principal {
         this.role = role;
     }
 
+    public User(String username, String password, String name, String role) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.role = role;
+    }
+
     public User(Integer id, String username, String password, String name, Boolean isBlocked, String role) {
         this.id = id;
         this.username = username;

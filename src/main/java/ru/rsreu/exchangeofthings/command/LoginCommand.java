@@ -14,6 +14,7 @@ import ru.rsreu.exchangeofthings.util.UserUtil;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -46,9 +47,9 @@ public class LoginCommand extends FrontCommand {
         User user = sessionService.createSession(username, password);
         Role role = Role.valueOf(user.getRole().toUpperCase());
         Route startRoute = AuthConfig.getStartPage(role);
+        Cookie userCookie = UserUtil.createUserCookie(user);
 
-        UserUtil.setToSession(request.getSession(), user);
-
+        response.addCookie(userCookie);
         json(new LoginResponseDTO(startRoute.getPath()));
     }
 }

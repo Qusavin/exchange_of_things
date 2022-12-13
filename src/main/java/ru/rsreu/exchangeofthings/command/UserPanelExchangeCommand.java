@@ -1,13 +1,14 @@
 package ru.rsreu.exchangeofthings.command;
 
-import ru.rsreu.exchangeofthings.database.entity.ExchangeRequest;
 import ru.rsreu.exchangeofthings.database.entity.Item;
+import ru.rsreu.exchangeofthings.database.entity.User;
 import ru.rsreu.exchangeofthings.enums.Jsp;
 import ru.rsreu.exchangeofthings.enums.Status;
 import ru.rsreu.exchangeofthings.enums.UserPanelExchangeMode;
 import ru.rsreu.exchangeofthings.service.ExchangeRequestService;
 import ru.rsreu.exchangeofthings.service.ItemService;
 import ru.rsreu.exchangeofthings.service.ServiceFactory;
+import ru.rsreu.exchangeofthings.util.UserUtil;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,16 +19,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static ru.rsreu.exchangeofthings.constant.RequestAttribute.*;
+import static ru.rsreu.exchangeofthings.constant.RequestAttribute.MODE;
 import static ru.rsreu.exchangeofthings.constant.RequestParam.*;
 
 public class UserPanelExchangeCommand extends FrontCommand {
     private ItemService itemService;
     private ExchangeRequestService exchangeRequestService;
+    private User user;
 
     @Override
     public void init(ServletContext servletContext, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
         super.init(servletContext, servletRequest, servletResponse);
 
+        user = UserUtil.getFromRequest(request).orElseThrow(RuntimeException::new);
         itemService = ServiceFactory.getItemService();
         exchangeRequestService = ServiceFactory.getExchangeRequestService();
     }
@@ -41,7 +45,7 @@ public class UserPanelExchangeCommand extends FrontCommand {
                 ? UserPanelExchangeMode.MAKE_REQUEST
                 : UserPanelExchangeMode.COMPLETE_REQUEST;
 
-        List<Item> items = itemService.findByOwnerId(2).stream()
+        List<Item> items = itemService.findByOwnerId(user.getId()).stream()
                 .filter(Item::getAvailable).collect(Collectors.toList());
 
         Item senItem = mode == UserPanelExchangeMode.MAKE_REQUEST

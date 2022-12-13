@@ -53,8 +53,8 @@ function main() {
 
         const formData = new FormData();
 
-        formData.set('sen_item_id', senItemId);
-        formData.set('rec_item_id', recItemId);
+        formData.set('sen_item_id', status === Status.InProcess ? senItemId : recItemId);
+        formData.set('rec_item_id', status === Status.InProcess ? recItemId : senItemId);
         formData.set('status', status);
 
         fetch('user-panel/exchange', {

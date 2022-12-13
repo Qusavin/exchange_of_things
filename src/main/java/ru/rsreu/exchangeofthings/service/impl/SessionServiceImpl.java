@@ -12,6 +12,7 @@ import ru.rsreu.exchangeofthings.service.SessionService;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static ru.rsreu.exchangeofthings.constant.GlobalOptions.SESSION_TIME_LIVE;
 
@@ -44,6 +45,16 @@ public class SessionServiceImpl implements SessionService {
         sessionDAO.save(session);
 
         return user;
+    }
+
+    @Override
+    public void deleteSession(User user) {
+        sessionDAO.deleteSession(user.getId());
+    }
+
+    @Override
+    public Optional<Session> getSession(int userId) {
+        return sessionDAO.getSession(userId);
     }
 
     public static SessionServiceImpl getInstance() {

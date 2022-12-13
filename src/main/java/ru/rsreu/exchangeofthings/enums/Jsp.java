@@ -4,6 +4,7 @@ public enum Jsp {
     LOGIN("/pages/login.jsp"),
 
     ADMIN_PANEL("/pages/admin_panel.jsp"),
+    ADMIN_PANEL_TABLE("/pages/admin-panel/table.jsp"),
 
     USER_PANEL("/pages/user_panel.jsp"),
     USER_PANEL_THING("/pages/user-panel/thing.jsp"),

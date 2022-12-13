@@ -3,6 +3,7 @@ package ru.rsreu.exchangeofthings.service.impl;
 import ru.rsreu.exchangeofthings.dao.DAOFactory;
 import ru.rsreu.exchangeofthings.dao.UserDAO;
 import ru.rsreu.exchangeofthings.database.entity.User;
+import ru.rsreu.exchangeofthings.enums.Role;
 import ru.rsreu.exchangeofthings.service.UserService;
 
 import java.util.List;
@@ -22,22 +23,50 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(int id) {
-        return userDAO.findById(id).orElseThrow(() -> new RuntimeException());
+        return userDAO.findById(id).orElseThrow(RuntimeException::new);
     }
 
     @Override
     public User findByUsername(String username) {
-        return userDAO.findByUsername(username).orElseThrow(() -> new RuntimeException());
+        return userDAO.findByUsername(username).orElseThrow(RuntimeException::new);
     }
 
     @Override
-    public User save(User user) {
-        return userDAO.save(user).orElseThrow(() -> new RuntimeException());
+    public User add(
+            String name,
+            String username,
+            String password,
+            Role role
+    ) {
+        User user = new User(
+                username,
+                password,
+                name,
+                role.getName()
+        );
+
+        return userDAO.save(user).orElseThrow(RuntimeException::new);
     }
 
     @Override
-    public User update(User user) {
-        return userDAO.update(user).orElseThrow(() -> new RuntimeException());
+    public User update(
+            int id,
+            String name,
+            String username,
+            String password,
+            boolean isBLocked,
+            Role role
+    ) {
+        User user = new User(
+                id,
+                username,
+                password,
+                name,
+                isBLocked,
+                role.getName()
+        );
+
+        return userDAO.update(user).orElseThrow(RuntimeException::new);
     }
 
     @Override
