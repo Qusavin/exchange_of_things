@@ -16,15 +16,20 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public List<Item> findAll() {
+        return itemDAO.findAll();
+    }
+
+    @Override
     public Item save(Item item) {
         return itemDAO.save(item)
-                .orElseThrow(() -> new RuntimeException());
+                .orElseThrow(RuntimeException::new);
     }
 
     @Override
     public Item findById(int id) {
         return itemDAO.findById(id)
-                .orElseThrow(() -> new RuntimeException());
+                .orElseThrow(RuntimeException::new);
     }
 
     @Override

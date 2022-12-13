@@ -1,6 +1,5 @@
 package ru.rsreu.exchangeofthings.command;
 
-import ru.rsreu.exchangeofthings.constant.RequestParam;
 import ru.rsreu.exchangeofthings.data.UserWithSession;
 import ru.rsreu.exchangeofthings.database.entity.User;
 import ru.rsreu.exchangeofthings.enums.AdminPanelMode;

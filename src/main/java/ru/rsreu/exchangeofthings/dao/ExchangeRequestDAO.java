@@ -6,6 +6,8 @@ import ru.rsreu.exchangeofthings.database.entity.Item;
 import java.util.List;
 
 public interface ExchangeRequestDAO {
+    List<ExchangeRequest> findByStatus(String status);
+
     List<ExchangeRequest> findByReceiverIdAndStatus(int receiverId, String status);
 
     void save(ExchangeRequest exchangeRequest);

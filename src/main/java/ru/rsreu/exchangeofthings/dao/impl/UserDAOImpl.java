@@ -139,7 +139,7 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
     @Override
     public void updateIsBlocked(int userId) {
         User user = findById(userId)
-                .orElseThrow(() -> new RuntimeException());
+                .orElseThrow(RuntimeException::new);
         String query = resourcer.getString("query.user.update.is.blocked");
 
         try (PreparedStatement st = connection.prepareStatement(query)) {

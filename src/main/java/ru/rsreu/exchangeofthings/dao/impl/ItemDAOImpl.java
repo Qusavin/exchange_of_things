@@ -16,6 +16,24 @@ public class ItemDAOImpl extends AbstractDAO implements ItemDAO {
     private static volatile ItemDAOImpl instance;
 
     @Override
+    public List<Item> findAll() {
+        String query = resourcer.getString("query.item.find.all");
+        List<Item> items = new ArrayList<>();
+
+        try (PreparedStatement st = connection.prepareStatement(query)) {
+            ResultSet resultSet = st.executeQuery();
+
+            while (resultSet.next()) {
+                items.add(DAOMapper.mapItemWithUser(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return items;
+    }
+
+    @Override
     public Optional<Item> save(Item item) {
         String query = resourcer.getString("query.item.save");
         String[] returnId = {"id"};

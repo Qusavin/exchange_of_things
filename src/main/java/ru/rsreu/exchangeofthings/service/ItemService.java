@@ -5,6 +5,8 @@ import ru.rsreu.exchangeofthings.database.entity.Item;
 import java.util.List;
 
 public interface ItemService {
+    List<Item> findAll();
+
     Item save(Item item);
 
     Item findById(int id);

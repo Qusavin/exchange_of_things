@@ -8,7 +8,6 @@ const Table = {
     MY_EXCHANGE_ITEMS: 'my_exchange_items'
 };
 
-
 const tableHydrateFunction = {
     [Table.MY_ITEMS]: hydrateMyItemsTable,
     [Table.MY_EXCHANGE_ITEMS]: hydrateMyExchangeItemsTable,

@@ -17,6 +17,26 @@ public class ExchangeRequestDAOImpl extends AbstractDAO implements ExchangeReque
     private static volatile ExchangeRequestDAOImpl instance;
 
     @Override
+    public List<ExchangeRequest> findByStatus(String status) {
+        String query = resourcer.getString("query.exchange.find.by.status");
+        List<ExchangeRequest> exchangeRequests = new ArrayList<>();
+
+        try (PreparedStatement st = connection.prepareStatement(query)) {
+            st.setString(1, status);
+
+            ResultSet resultSet = st.executeQuery();
+
+            while (resultSet.next()) {
+                exchangeRequests.add(DAOMapper.mapExchangeRequest(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return exchangeRequests;
+    }
+
+    @Override
     public List<ExchangeRequest> findByReceiverIdAndStatus(int receiverId, String status) {
         String query = resourcer.getString("query.exchange.find.by.receiver.id");
         List<ExchangeRequest> exchangeRequests = new ArrayList<>();

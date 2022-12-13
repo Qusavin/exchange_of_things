@@ -21,6 +21,11 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
     }
 
     @Override
+    public List<ExchangeRequest> findByStatus(Status status) {
+        return exchangeRequestDAO.findByStatus(status.getValue());
+    }
+
+    @Override
     public List<ExchangeRequest> findByReceiverIdAndStatus(int receiverId, String status) {
         return exchangeRequestDAO.findByReceiverIdAndStatus(receiverId, status);
     }

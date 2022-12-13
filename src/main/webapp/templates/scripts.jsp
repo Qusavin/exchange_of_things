@@ -11,3 +11,4 @@
 <script type="module" src="/js/pages/user-panel.mjs"></script>
 <script type="module" src="/js/pages/user-panel-exchange.mjs"></script>
 <script type="module" src="/js/pages/admin-panel.mjs"></script>
+<script type="module" src="/js/pages/moderator-panel.mjs"></script>

@@ -38,8 +38,8 @@ public class UserPanelExchangeCommand extends FrontCommand {
 
     @Override
     public void process() throws ServletException, IOException {
-        String senItemIdAsString = request.getParameter(USER_PANEL_SEN_ITEM_ID);
-        String recItemIdAsString = request.getParameter(USER_PANEL_REC_ITEM_ID);
+        String senItemIdAsString = request.getParameter(SEN_ITEM_ID);
+        String recItemIdAsString = request.getParameter(REC_ITEM_ID);
 
         UserPanelExchangeMode mode = senItemIdAsString == null
                 ? UserPanelExchangeMode.MAKE_REQUEST
@@ -64,8 +64,8 @@ public class UserPanelExchangeCommand extends FrontCommand {
     @Override
     public void send() {
         Status status = Status.valueOf(request.getParameter(ITEM_STATUS).toUpperCase());
-        int senItemId = Integer.parseInt(request.getParameter(USER_PANEL_SEN_ITEM_ID));
-        int recItemId = Integer.parseInt(request.getParameter(USER_PANEL_REC_ITEM_ID));
+        int senItemId = Integer.parseInt(request.getParameter(SEN_ITEM_ID));
+        int recItemId = Integer.parseInt(request.getParameter(REC_ITEM_ID));
 
         exchangeRequestService.updateStatus(senItemId, recItemId, status);
     }

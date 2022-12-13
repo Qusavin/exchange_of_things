@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ItemDAO {
+    List<Item> findAll();
+
     Optional<Item> save(Item item);
 
     Optional<Item> findById(int id);

@@ -89,7 +89,7 @@ public class UserPanelCommand extends FrontCommand {
     }
 
     private void removeItem(UserPanelTablePart tablePart) {
-        String removeItemId = request.getParameter(USER_PANEL_REMOVE_ITEM_ID);
+        String removeItemId = request.getParameter(REMOVE_ITEM_ID);
 
         if (
                 removeItemId != null && (
