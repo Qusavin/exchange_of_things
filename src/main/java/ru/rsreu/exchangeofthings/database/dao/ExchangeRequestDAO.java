@@ -1,5 +1,6 @@
 package ru.rsreu.exchangeofthings.database.dao;
 
+import ru.rsreu.exchangeofthings.persistent.entity.User;
 import ru.rsreu.exchangeofthings.persistent.request.ExchangeRequest;
 import ru.rsreu.exchangeofthings.persistent.entity.Item;
 
@@ -15,4 +16,10 @@ public interface ExchangeRequestDAO {
     void deleteById(int id);
 
     void updateStatus(Item senItem, Item recItem, String status);
+
+    void updateStatusByReceiverItem(Item recItem, String status);
+
+    void updateStatusBySenderItem(Item senItem, String status);
+
+    void rejectByBlockedUser(User user);
 }

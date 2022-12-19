@@ -49,6 +49,6 @@ public class LoginCommand extends FrontCommand {
         Cookie userCookie = UserUtil.createUserCookie(user);
 
         response.addCookie(userCookie);
-        send(new RedirectDTO(startRoute.getAbsolute()));
+        json(new RedirectDTO(startRoute.getAbsolute()));
     }
 }

@@ -1,7 +1,6 @@
 package ru.rsreu.exchangeofthings.service.impl;
 
-import ru.rsreu.exchangeofthings.database.dao.DAOFactory;
-import ru.rsreu.exchangeofthings.database.dao.UserDAO;
+import ru.rsreu.exchangeofthings.database.dao.*;
 import ru.rsreu.exchangeofthings.persistent.entity.User;
 import ru.rsreu.exchangeofthings.persistent.enums.Role;
 import ru.rsreu.exchangeofthings.service.UserService;
@@ -10,10 +9,14 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private static volatile UserServiceImpl instance;
+    private ExchangeRequestDAO exchangeRequestDAO;
     private UserDAO userDAO;
+    private SessionDAO sessionDAO;
 
-    public UserServiceImpl(UserDAO userDAO) {
+    public UserServiceImpl(ExchangeRequestDAO exchangeRequestDAO, UserDAO userDAO, SessionDAO sessionDAO) {
+        this.exchangeRequestDAO = exchangeRequestDAO;
         this.userDAO = userDAO;
+        this.sessionDAO = sessionDAO;
     }
 
     @Override
@@ -76,6 +79,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateIsBlocked(int userId) {
+        User user = userDAO.findById(userId).orElseThrow(RuntimeException::new);
+
+        if (!user.getBlocked()) {
+            exchangeRequestDAO.rejectByBlockedUser(user);
+            sessionDAO.deleteSession(user.getId());
+        }
+
         userDAO.updateIsBlocked(userId);
     }
 
@@ -83,7 +93,9 @@ public class UserServiceImpl implements UserService {
         synchronized (UserServiceImpl.class) {
             if (instance == null) {
                 UserDAO userDAO = DAOFactory.getUserDAO();
-                instance = new UserServiceImpl(userDAO);
+                ExchangeRequestDAO exchangeRequestDAO = DAOFactory.getExchangeRequestDAO();
+                SessionDAO sessionDAO = DAOFactory.getSessionDAO();
+                instance = new UserServiceImpl(exchangeRequestDAO, userDAO, sessionDAO);
             }
         }
 

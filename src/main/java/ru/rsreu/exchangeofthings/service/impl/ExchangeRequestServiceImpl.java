@@ -50,6 +50,7 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
         senItem = itemDAO.findById(senItemId).orElseThrow(RuntimeException::new);
         recItem = itemDAO.findById(recItemId).orElseThrow(RuntimeException::new);
 
+        exchangeRequestDAO.updateStatusByReceiverItem(recItem, Status.REJECTED.getValue());
         exchangeRequestDAO.updateStatus(senItem, recItem, status.getValue());
 
         if (status == Status.ACCEPTED) {

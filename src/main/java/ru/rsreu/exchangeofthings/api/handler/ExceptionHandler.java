@@ -10,7 +10,7 @@ import java.io.IOException;
 public class ExceptionHandler extends Router {
     public void handleException(Exception exception) throws ServletException, IOException {
         if (exception instanceof AuthException) {
-            send(new ErrorDTO("Invalid username or password"), HttpServletResponse.SC_BAD_REQUEST);
+            json(new ErrorDTO("Invalid username or password"), HttpServletResponse.SC_BAD_REQUEST);
 
             return;
         }

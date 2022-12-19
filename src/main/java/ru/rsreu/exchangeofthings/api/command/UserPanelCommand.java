@@ -142,7 +142,7 @@ public class UserPanelCommand extends FrontCommand {
 
     private void exchangeItems() throws ServletException, IOException {
         List<Item> items = itemService.findAvailableItems().stream()
-                .filter(item -> !item.getOwner().getId().equals(user.getId()))
+                .filter(item -> !item.getOwner().getId().equals(user.getId()) && !item.getOwner().getBlocked())
                 .collect(Collectors.toList());
 
         request.setAttribute(ITEMS, items);

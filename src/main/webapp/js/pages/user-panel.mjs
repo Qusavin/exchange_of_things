@@ -121,17 +121,17 @@ function main() {
             return;
         }
 
-        fetch(`user-panel?table_part=${currentTable}&add_item=true`, {
-            method: 'post',
+        makeRequest(`user-panel?table_part=${currentTable}&add_item=true`, {
             body: getUrlencodedFormData(formData),
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            }
-        })
-            .then(res => res.text())
-            .then(html => renderCurrentTable(html));
+            method: 'post'
+        }).then(html => renderCurrentTable(html));
+
         addThingModalCloseElement.click();
+
+        addTitleElement.value = '';
+        addImageUrlElement.value = '';
+        addCategoryElement.value = '';
+        addDescriptionElement.value = '';
     });
 }
 

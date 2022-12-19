@@ -2,6 +2,7 @@ package ru.rsreu.exchangeofthings.database.dao.impl;
 
 import ru.rsreu.exchangeofthings.database.dao.AbstractDAO;
 import ru.rsreu.exchangeofthings.database.dao.ExchangeRequestDAO;
+import ru.rsreu.exchangeofthings.persistent.entity.User;
 import ru.rsreu.exchangeofthings.persistent.request.ExchangeRequest;
 import ru.rsreu.exchangeofthings.persistent.entity.Item;
 import ru.rsreu.exchangeofthings.support.mapper.DAOMapper;
@@ -94,6 +95,48 @@ public class ExchangeRequestDAOImpl extends AbstractDAO implements ExchangeReque
             st.setString(1, status);
             st.setInt(2, senItem.getId());
             st.setInt(3, recItem.getId());
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateStatusByReceiverItem(Item recItem, String status) {
+        String query = resourcer.getString("query.exchange.update.by.receiver.id");
+
+        try (PreparedStatement st = connection.prepareStatement(query)) {
+            st.setString(1, status);
+            st.setInt(2, recItem.getId());
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateStatusBySenderItem(Item senItem, String status) {
+        String query = resourcer.getString("query.exchange.update.by.sender.id");
+
+        try (PreparedStatement st = connection.prepareStatement(query)) {
+            st.setString(1, status);
+            st.setInt(2, senItem.getId());
+
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void rejectByBlockedUser(User user) {
+        String query = resourcer.getString("query.exchange.reject.by.blocked.user.id");
+
+        try (PreparedStatement st = connection.prepareStatement(query)) {
+            st.setInt(1, user.getId());
+            st.setInt(2, user.getId());
 
             st.executeUpdate();
         } catch (SQLException e) {

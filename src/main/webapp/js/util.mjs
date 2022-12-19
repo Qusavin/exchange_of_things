@@ -12,21 +12,23 @@ export function getUrlencodedFormData(formData) {
     return params.toString();
 }
 
-export function redirect(path) {
-    const url = [
+export function getUrl(relativePath) {
+    return [
         window.location.origin,
         'exchange-of-things',
-        path
+        relativePath
     ].join('/');
-
-    window.location.href = url;
 }
 
-export async function makeRequest(url, options, plainText = true) {
+export function redirect(path) {
+    window.location.href = getUrl(path);
+}
+
+export async function makeRequest(relativePath, options, plainText = true) {
     const body = options.body ?? {};
     const method = options.method ?? 'get';
 
-    const response = await fetch(url, {
+    const response = await fetch(getUrl(relativePath), {
         method,
         body,
         credentials: 'same-origin',
