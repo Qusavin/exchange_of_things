@@ -2,7 +2,7 @@ package ru.rsreu.exchangeofthings.controller;
 
 import ru.rsreu.exchangeofthings.command.FrontCommand;
 import ru.rsreu.exchangeofthings.handler.ExceptionHandler;
-import ru.rsreu.exchangeofthings.util.CommandUtil;
+import ru.rsreu.exchangeofthings.database.util.CommandUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

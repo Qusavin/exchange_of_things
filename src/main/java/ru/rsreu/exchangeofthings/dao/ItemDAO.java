@@ -21,4 +21,6 @@ public interface ItemDAO {
     void updateIsAvailable(int id);
 
     void updateOwner(int itemId, int ownerId);
+
+    void updateViewsNumber(int id);
 }

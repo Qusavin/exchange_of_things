@@ -1,4 +1,4 @@
-package ru.rsreu.exchangeofthings.util;
+package ru.rsreu.exchangeofthings.database.util;
 
 import ru.rsreu.exchangeofthings.config.AuthConfig;
 import ru.rsreu.exchangeofthings.database.entity.User;
@@ -12,7 +12,7 @@ public class PermissionUtil {
         List<Route> routes = AuthConfig.getRoutes(Role.valueOf(user.getRole().toUpperCase()));
 
         for (Route route : routes) {
-            if (path.contains(route.getPath())) {
+            if (path.contains(route.getRelative())) {
                 return true;
             }
         }

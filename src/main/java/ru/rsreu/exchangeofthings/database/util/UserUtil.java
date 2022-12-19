@@ -1,4 +1,4 @@
-package ru.rsreu.exchangeofthings.util;
+package ru.rsreu.exchangeofthings.database.util;
 
 import ru.rsreu.exchangeofthings.database.entity.User;
 

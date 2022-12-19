@@ -34,6 +34,18 @@ public class ItemDAOImpl extends AbstractDAO implements ItemDAO {
     }
 
     @Override
+    public void updateViewsNumber(int id) {
+        String query = resourcer.getString("query.item.update.viewsnumbers");
+
+        try (PreparedStatement st = connection.prepareStatement(query)) {
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public Optional<Item> save(Item item) {
         String query = resourcer.getString("query.item.save");
         String[] returnId = {"id"};

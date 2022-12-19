@@ -52,6 +52,11 @@ public class ItemServiceImpl implements ItemService {
         itemDAO.updateIsAvailable(id);
     }
 
+    @Override
+    public void updateViewsNumber(int id) {
+        itemDAO.updateViewsNumber(id);
+    }
+
     public static ItemServiceImpl getInstance() {
         synchronized (ItemServiceImpl.class) {
             if (instance == null) {

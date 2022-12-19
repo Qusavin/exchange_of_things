@@ -1,4 +1,4 @@
-package ru.rsreu.exchangeofthings.util;
+package ru.rsreu.exchangeofthings.database.util;
 
 import static ru.rsreu.exchangeofthings.constant.GlobalOptions.URL_PREFIX;
 

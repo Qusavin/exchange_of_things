@@ -1,7 +1,7 @@
-package ru.rsreu.exchangeofthings.util;
+package ru.rsreu.exchangeofthings.database.util;
 
 import ru.rsreu.exchangeofthings.command.FrontCommand;
-import ru.rsreu.exchangeofthings.constant.Command;
+import ru.rsreu.exchangeofthings.config.CommandConfig;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +12,6 @@ public class CommandUtil {
     public static FrontCommand getCommand(HttpServletRequest request) {
         String url = request.getPathInfo();
 
-        return Command.getCommand(url);
+        return CommandConfig.getCommand(url);
     }
 }

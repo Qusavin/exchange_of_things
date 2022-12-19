@@ -4,7 +4,7 @@ import ru.rsreu.exchangeofthings.database.entity.User;
 import ru.rsreu.exchangeofthings.enums.Route;
 import ru.rsreu.exchangeofthings.service.ServiceFactory;
 import ru.rsreu.exchangeofthings.service.SessionService;
-import ru.rsreu.exchangeofthings.util.UserUtil;
+import ru.rsreu.exchangeofthings.database.util.UserUtil;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -27,6 +27,6 @@ public class LogoutCommand extends FrontCommand {
     @Override
     public void process() throws ServletException, IOException {
         sessionService.deleteSession(user);
-        response.sendRedirect(Route.LOGIN.getPath());
+        response.sendRedirect(Route.LOGIN.getAbsolute());
     }
 }

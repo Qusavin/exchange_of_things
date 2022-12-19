@@ -27,9 +27,11 @@ public class UserPanelThingCommand extends FrontCommand {
     @Override
     public void process() throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter(USER_PANEL_ITEM_ID));
-        Item item = itemService.findById(id);
 
-        request.setAttribute(ITEM, item);
+        itemService.updateViewsNumber(id);
+
+        Item updatedItem = itemService.findById(id);
+        request.setAttribute(ITEM, updatedItem);
         forward(Jsp.USER_PANEL_THING);
     }
 }

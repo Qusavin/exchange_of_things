@@ -17,7 +17,7 @@ public enum Jsp {
     MODERATOR_PANEL_EXCHANGE_REQUESTS_TABLE("/pages/moderator-panel/exchange-requests-table.jsp"),
     MODERATOR_PANEL("/pages/moderator_panel.jsp"),
 
-    NOT_FOUND("/pages/not_found.jsp"),
+    NOT_FOUND("/pages/404.jsp"),
 
     REDIRECT("/templates/redirect.jsp");
 

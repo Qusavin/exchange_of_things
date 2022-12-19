@@ -18,4 +18,6 @@ public interface ItemService {
     void deleteById(int id);
 
     void updateIsAvailable(int id);
+
+    void updateViewsNumber(int id);
 }

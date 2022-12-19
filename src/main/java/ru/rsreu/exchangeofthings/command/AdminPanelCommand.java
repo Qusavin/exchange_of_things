@@ -8,7 +8,7 @@ import ru.rsreu.exchangeofthings.enums.Role;
 import ru.rsreu.exchangeofthings.service.ServiceFactory;
 import ru.rsreu.exchangeofthings.service.SessionService;
 import ru.rsreu.exchangeofthings.service.UserService;
-import ru.rsreu.exchangeofthings.util.UserUtil;
+import ru.rsreu.exchangeofthings.database.util.UserUtil;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
