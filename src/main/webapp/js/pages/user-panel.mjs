@@ -1,4 +1,4 @@
-import {getUrlencodedFormData, redirect} from '../util.mjs';
+import {getUrlencodedFormData, makeRequest, redirect} from '../util.mjs';
 
 const userPanelElement = document.querySelector('#user-panel');
 
@@ -175,13 +175,9 @@ function hydrateMyExchangeItemsTable() {
         const itemId = tableRowElement.querySelector('.thing-id').innerText.trim();
 
         removeBtnElement.addEventListener('click', () => {
-            fetch(`user-panel?table_part=${currentTable}&exchange_item_id=${itemId}`, {
+            makeRequest(`user-panel?table_part=${currentTable}&exchange_item_id=${itemId}`, {
                 method: 'post',
-                credentials: 'same-origin',
-                cache: 'no-cache'
-            })
-                .then(res => res.text())
-                .then(html => renderCurrentTable(html));
+            }).then(html => renderCurrentTable(html));
         });
         openBtnElement.addEventListener('click', () => {
             redirect(`user-panel/thing?item_id=${itemId}`);
@@ -198,23 +194,15 @@ function hydrateMyItemsTable() {
         const itemId = tableRowElement.querySelector('.thing-id').innerText.trim();
 
         removeBtnElement.addEventListener('click', () => {
-            fetch(`user-panel?table_part=${currentTable}&remove_item_id=${itemId}`, {
+            makeRequest(`user-panel?table_part=${currentTable}&remove_item_id=${itemId}`, {
                 method: 'post',
-                credentials: 'same-origin',
-                cache: 'no-cache'
-            })
-                .then(res => res.text())
-                .then(html => renderCurrentTable(html));
+            }).then(html => renderCurrentTable(html));
         });
 
         addToExchangeBtnElement.addEventListener('click', () => {
-            fetch(`user-panel?table_part=${currentTable}&exchange_item_id=${itemId}`, {
-                method: 'post',
-                credentials: 'same-origin',
-                cache: 'no-cache'
-            })
-                .then(res => res.text())
-                .then(html => renderCurrentTable(html));
+            makeRequest(`user-panel?table_part=${currentTable}&exchange_item_id=${itemId}`, {
+                method: 'post'
+            }).then(html => renderCurrentTable(html));
         });
     });
 }

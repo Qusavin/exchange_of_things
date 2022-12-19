@@ -22,7 +22,7 @@ export function redirect(path) {
     window.location.href = url;
 }
 
-export async function makeRequest(url, options) {
+export async function makeRequest(url, options, plainText = true) {
     const body = options.body ?? {};
     const method = options.method ?? 'get';
 
@@ -34,7 +34,9 @@ export async function makeRequest(url, options) {
     });
 
     const status = response.status;
-    const data = await response.json();
+    const data = plainText
+        ? await response.text()
+        : await response.json();
 
     return {status, data};
 }

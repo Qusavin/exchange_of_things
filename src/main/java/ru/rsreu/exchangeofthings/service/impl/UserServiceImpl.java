@@ -1,9 +1,9 @@
 package ru.rsreu.exchangeofthings.service.impl;
 
-import ru.rsreu.exchangeofthings.dao.DAOFactory;
-import ru.rsreu.exchangeofthings.dao.UserDAO;
-import ru.rsreu.exchangeofthings.database.entity.User;
-import ru.rsreu.exchangeofthings.enums.Role;
+import ru.rsreu.exchangeofthings.database.dao.DAOFactory;
+import ru.rsreu.exchangeofthings.database.dao.UserDAO;
+import ru.rsreu.exchangeofthings.persistent.entity.User;
+import ru.rsreu.exchangeofthings.persistent.enums.Role;
 import ru.rsreu.exchangeofthings.service.UserService;
 
 import java.util.List;

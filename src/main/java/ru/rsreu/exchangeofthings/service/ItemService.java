@@ -1,6 +1,6 @@
 package ru.rsreu.exchangeofthings.service;
 
-import ru.rsreu.exchangeofthings.database.entity.Item;
+import ru.rsreu.exchangeofthings.persistent.entity.Item;
 
 import java.util.List;
 

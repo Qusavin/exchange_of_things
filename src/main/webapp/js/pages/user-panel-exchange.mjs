@@ -1,4 +1,4 @@
-import {getUrlencodedFormData, redirect} from '../util.mjs';
+import {getUrlencodedFormData, makeRequest, redirect} from '../util.mjs';
 
 const exchangeElement = document.querySelector('#exchange');
 
@@ -6,6 +6,14 @@ const Status = {
     Accepted: 'accepted',
     Rejected: 'rejected',
     InProcess: 'in_process'
+};
+
+const ItemSelector = {
+    ImageUrl: '.image',
+    Title: '.title',
+    Description: '.description',
+    ViewsNumber: '.views-number',
+    Category: '.category'
 };
 
 if (exchangeElement !== null) {
@@ -20,14 +28,6 @@ function main() {
     const makeRequestBtnElement = document.querySelector('#make-request');
     const acceptRequestBtnElement = document.querySelector('#accept-request');
     const declineRequestBtnElement = document.querySelector('#decline-request');
-
-    const ItemSelector = {
-        ImageUrl: '.image',
-        Title: '.title',
-        Description: '.description',
-        ViewsNumber: '.views-number',
-        Category: '.category'
-    };
 
     selectOwnItemsElement?.addEventListener('change', () => {
         const itemId = selectOwnItemsElement.value.trim();
@@ -57,16 +57,10 @@ function main() {
         formData.set('rec_item_id', status === Status.InProcess ? recItemId : senItemId);
         formData.set('status', status);
 
-        fetch('user-panel/exchange', {
+        makeRequest('user-panel/exchange', {
             method: 'post',
             body: getUrlencodedFormData(formData),
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            }
-        })
-            .then(res => res.text())
-            .then(() => redirect('user-panel'));
+        }).then(() => redirect('user-panel'));
     };
 
     makeRequestBtnElement?.addEventListener('click', () => changeRequestStatus(Status.InProcess));

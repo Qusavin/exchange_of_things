@@ -1,7 +1,7 @@
 package ru.rsreu.exchangeofthings.service;
 
-import ru.rsreu.exchangeofthings.database.entity.User;
-import ru.rsreu.exchangeofthings.enums.Role;
+import ru.rsreu.exchangeofthings.persistent.entity.User;
+import ru.rsreu.exchangeofthings.persistent.enums.Role;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
 package ru.rsreu.exchangeofthings.service.impl;
 
-import ru.rsreu.exchangeofthings.dao.DAOFactory;
-import ru.rsreu.exchangeofthings.dao.ExchangeRequestDAO;
-import ru.rsreu.exchangeofthings.dao.ItemDAO;
-import ru.rsreu.exchangeofthings.database.entity.ExchangeRequest;
-import ru.rsreu.exchangeofthings.database.entity.Item;
-import ru.rsreu.exchangeofthings.enums.Status;
+import ru.rsreu.exchangeofthings.database.dao.DAOFactory;
+import ru.rsreu.exchangeofthings.database.dao.ExchangeRequestDAO;
+import ru.rsreu.exchangeofthings.database.dao.ItemDAO;
+import ru.rsreu.exchangeofthings.persistent.request.ExchangeRequest;
+import ru.rsreu.exchangeofthings.persistent.entity.Item;
+import ru.rsreu.exchangeofthings.persistent.enums.Status;
 import ru.rsreu.exchangeofthings.service.ExchangeRequestService;
 
 import java.util.List;

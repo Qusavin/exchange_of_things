@@ -32,11 +32,10 @@ function main() {
         e.preventDefault();
 
         const formData = new FormData(loginFormElement);
-
         const response = await makeRequest('login', {
             method: 'post',
             body: getUrlencodedFormData(formData)
-        });
+        }, false);
 
         if (response.status === 400) {
             usernameErrorElement.classList.remove(hiddenClass);
@@ -44,8 +43,8 @@ function main() {
             return;
         }
 
-        const {redirectUrl} = response.data;
+        const {url} = response.data;
 
-        redirect(redirectUrl);
+        redirect(url);
     });
 }

@@ -1,4 +1,4 @@
-import {getUrlencodedFormData} from '../util.mjs';
+import {getUrlencodedFormData, makeRequest} from '../util.mjs';
 
 const moderatorPanelElement = document.querySelector('#moderator-panel-page');
 const usersContainerElement = document.querySelector('#users-container');
@@ -41,19 +41,13 @@ function hydrateExchangeRequestsTable() {
         formData.set('status', Status.Rejected);
 
         declineBtnElement.addEventListener('click', () => {
-            fetch('moderator-panel', {
+            makeRequest('moderator-panel', {
                 body: getUrlencodedFormData(formData),
                 method: 'post',
-                credentials: 'same-origin',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                }
-            })
-                .then(res => res.text())
-                .then(html => {
-                    exchangeRequestsContainerElement.innerHTML = html;
-                    hydrateExchangeRequestsTable();
-                });
+            }).then(html => {
+                exchangeRequestsContainerElement.innerHTML = html;
+                hydrateExchangeRequestsTable();
+            });
         });
     });
 };
@@ -113,13 +107,9 @@ function hydrateUsersTable() {
 
         userIds.forEach(id => formData.append('id', id));
 
-        fetch('moderator-panel', {
-            method: 'post',
+        makeRequest('moderator-panel', {
             body: getUrlencodedFormData(formData),
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            }
+            method: 'post'
         }).then(() => window.location.reload());
     };
 }
@@ -136,19 +126,13 @@ function hydrateUserThingsTable() {
 
             formData.set('remove_item_id', itemId);
 
-            fetch('moderator-panel', {
+            makeRequest('moderator-panel', {
                 body: getUrlencodedFormData(formData),
                 method: 'post',
-                credentials: 'same-origin',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                }
-            })
-                .then(res => res.text())
-                .then(html => {
-                    userThingsContainerElement.innerHTML = html;
-                    hydrateUserThingsTable();
-                });
+            }).then(html => {
+                userThingsContainerElement.innerHTML = html;
+                hydrateUserThingsTable();
+            });
         });
     });
 }

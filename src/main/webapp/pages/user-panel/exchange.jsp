@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
-         import="ru.rsreu.exchangeofthings.enums.UserPanelExchangeMode" %>
+         import="ru.rsreu.exchangeofthings.persistent.enums.UserPanelExchangeMode" %>
 <html>
 <head>
     <%@include file="/templates/meta.jsp" %>

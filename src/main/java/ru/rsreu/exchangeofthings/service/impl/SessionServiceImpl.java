@@ -1,13 +1,13 @@
 package ru.rsreu.exchangeofthings.service.impl;
 
-import ru.rsreu.exchangeofthings.dao.DAOFactory;
-import ru.rsreu.exchangeofthings.dao.SessionDAO;
-import ru.rsreu.exchangeofthings.dao.UserDAO;
-import ru.rsreu.exchangeofthings.data.UserWithSession;
-import ru.rsreu.exchangeofthings.database.entity.Session;
-import ru.rsreu.exchangeofthings.database.entity.User;
-import ru.rsreu.exchangeofthings.exception.AuthException;
-import ru.rsreu.exchangeofthings.mapper.UserMapper;
+import ru.rsreu.exchangeofthings.database.dao.DAOFactory;
+import ru.rsreu.exchangeofthings.database.dao.SessionDAO;
+import ru.rsreu.exchangeofthings.database.dao.UserDAO;
+import ru.rsreu.exchangeofthings.persistent.response.UserWithSession;
+import ru.rsreu.exchangeofthings.persistent.entity.Session;
+import ru.rsreu.exchangeofthings.persistent.entity.User;
+import ru.rsreu.exchangeofthings.persistent.exception.AuthException;
+import ru.rsreu.exchangeofthings.support.mapper.UserMapper;
 import ru.rsreu.exchangeofthings.service.SessionService;
 
 import java.util.Date;

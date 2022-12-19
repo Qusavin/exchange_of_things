@@ -1,7 +1,7 @@
 package ru.rsreu.exchangeofthings.config;
 
-import ru.rsreu.exchangeofthings.command.*;
-import ru.rsreu.exchangeofthings.enums.Route;
+import ru.rsreu.exchangeofthings.api.command.*;
+import ru.rsreu.exchangeofthings.persistent.enums.Route;
 
 import java.util.*;
 

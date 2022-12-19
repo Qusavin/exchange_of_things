@@ -1,4 +1,4 @@
-import {getUrlencodedFormData, makeRequest, redirect} from '../util.mjs';
+import {getUrlencodedFormData, makeRequest} from '../util.mjs';
 
 const adminPanelElement = document.querySelector('#admin-panel-page');
 const Mode = {
@@ -176,12 +176,8 @@ function handleUserAdding() {
 }
 
 function fetchTable(formData, mode) {
-    fetch(`admin-panel?mode=${mode}`, {
-        method: 'post',
+    makeRequest(`admin-panel?mode=${mode}`, {
         body: getUrlencodedFormData(formData),
-        credentials: 'same-origin',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        }
+        method: 'post'
     }).then(() => window.location.reload());
 }
