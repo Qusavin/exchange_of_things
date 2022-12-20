@@ -3,6 +3,9 @@ package ru.rsreu.exchangeofthings.constant;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Holder of content types for specific file types.
+ */
 public class ContentType {
     public static final String JS = "text/javascript";
     public static final String MJS = "text/javascript";
@@ -29,10 +32,21 @@ public class ContentType {
             Map.entry(SVG_EXT, SVG)
     );
 
+    /**
+     * Get all file types.
+     *
+     * @return Set of file types
+     */
     public static Set<String> getFileTypes() {
         return contentTypes.keySet();
     }
 
+    /**
+     * Get content type for specific file type.
+     *
+     * @param fileType File type
+     * @return Content type
+     */
     public static String getContentType(String fileType) {
         if (contentTypes.containsKey(fileType)) {
             return contentTypes.get(fileType);

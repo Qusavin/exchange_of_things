@@ -5,6 +5,9 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.sql.Connection;
 
+/**
+ * Holder of database connection.
+ */
 public class ConnectionPool {
     private static final String DATASOURCE_NAME = "java:/comp/env/jdbc/exchangeofthings";
     private static volatile Connection connection;
@@ -12,6 +15,11 @@ public class ConnectionPool {
     private ConnectionPool() {
     }
 
+    /**
+     * Get connection.
+     *
+     * @return Connection
+     */
     public static Connection getConnection() {
         synchronized (ConnectionPool.class) {
             if (connection == null) {

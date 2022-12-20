@@ -1,6 +1,6 @@
 package ru.rsreu.exchangeofthings.support.mapper;
 
-import ru.rsreu.exchangeofthings.persistent.request.ExchangeRequest;
+import ru.rsreu.exchangeofthings.persistent.entity.ExchangeRequest;
 import ru.rsreu.exchangeofthings.persistent.entity.Item;
 import ru.rsreu.exchangeofthings.persistent.entity.Session;
 import ru.rsreu.exchangeofthings.persistent.entity.User;

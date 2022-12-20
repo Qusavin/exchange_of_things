@@ -3,6 +3,9 @@ package ru.rsreu.exchangeofthings.persistent.entity;
 import java.security.Principal;
 import java.util.Date;
 
+/**
+ * User entity.
+ */
 public class User implements Principal {
     private Integer id;
     private String username;

@@ -1,5 +1,8 @@
-package ru.rsreu.exchangeofthings.persistent.response;
+package ru.rsreu.exchangeofthings.persistent.entity;
 
+/**
+ * User with session entity.
+ */
 public class UserWithSession {
     private Integer id;
     private String username;

@@ -1,5 +1,8 @@
 package ru.rsreu.exchangeofthings.persistent.entity;
 
+/**
+ * Item entity.
+ */
 public class Item {
     private Integer id;
     private String title;

@@ -1,5 +1,8 @@
 package ru.rsreu.exchangeofthings.persistent.enums;
 
+/**
+ * Admin panel modes.
+ */
 public enum AdminPanelMode {
     ADD_USER("add_user"),
     EDIT_USER("edit_user"),

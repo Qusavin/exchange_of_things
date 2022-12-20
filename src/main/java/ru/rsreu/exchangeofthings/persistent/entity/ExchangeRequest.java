@@ -1,9 +1,10 @@
-package ru.rsreu.exchangeofthings.persistent.request;
-
-import ru.rsreu.exchangeofthings.persistent.entity.Item;
+package ru.rsreu.exchangeofthings.persistent.entity;
 
 import java.util.Date;
 
+/**
+ * Exchange request entity.
+ */
 public class ExchangeRequest {
     private Integer id;
     private Item receiverItem;

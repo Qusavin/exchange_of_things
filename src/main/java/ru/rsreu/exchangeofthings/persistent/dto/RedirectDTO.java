@@ -1,5 +1,8 @@
 package ru.rsreu.exchangeofthings.persistent.dto;
 
+/**
+ * Redirect dto.
+ */
 public class RedirectDTO {
     private String url;
 

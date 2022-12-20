@@ -1,6 +1,6 @@
 package ru.rsreu.exchangeofthings.api.command;
 
-import ru.rsreu.exchangeofthings.persistent.request.ExchangeRequest;
+import ru.rsreu.exchangeofthings.persistent.entity.ExchangeRequest;
 import ru.rsreu.exchangeofthings.persistent.entity.Item;
 import ru.rsreu.exchangeofthings.persistent.entity.User;
 import ru.rsreu.exchangeofthings.persistent.enums.Jsp;

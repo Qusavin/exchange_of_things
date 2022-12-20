@@ -26,6 +26,13 @@ public abstract class Router {
         this.response = servletResponse;
     }
 
+    /**
+     * Forward to specific jsp.
+     *
+     * @param page Path to jsp
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void forward(Jsp page) throws ServletException, IOException {
         RequestDispatcher dispatcher = context.getRequestDispatcher(page.getRoute());
 

@@ -1,5 +1,8 @@
 package ru.rsreu.exchangeofthings.persistent.enums;
 
+/**
+ * Exchange request statuses.
+ */
 public enum Status {
     ACCEPTED("Accepted"),
     REJECTED("Rejected"),

@@ -1,5 +1,8 @@
 package ru.rsreu.exchangeofthings.constant;
 
+/**
+ * Request params.
+ */
 public class RequestParam {
     public static final String USER_PANEL_TABLE_PART = "table_part";
     public static final String USER_PANEL_ADD_ITEM = "add_item";

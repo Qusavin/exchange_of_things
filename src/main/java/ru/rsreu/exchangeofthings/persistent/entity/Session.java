@@ -2,6 +2,9 @@ package ru.rsreu.exchangeofthings.persistent.entity;
 
 import java.util.Date;
 
+/**
+ * Session entity.
+ */
 public class Session {
     private Integer id;
     private Date expiredAt;

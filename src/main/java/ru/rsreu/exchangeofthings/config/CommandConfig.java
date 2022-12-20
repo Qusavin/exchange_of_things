@@ -5,6 +5,9 @@ import ru.rsreu.exchangeofthings.persistent.enums.Route;
 
 import java.util.*;
 
+/**
+ * Config of command for specific route.
+ */
 public class CommandConfig {
     private static final Map<Route, FrontCommand> commands = Map.ofEntries(
             Map.entry(Route.ADMIN_PANEL, new AdminPanelCommand()),
@@ -30,6 +33,12 @@ public class CommandConfig {
             Route.USER_PANEL
     );
 
+    /**
+     * Get front command by path.
+     *
+     * @param path Url path
+     * @return Front command
+     */
     public static FrontCommand getCommand(String path) {
         for (Route route : commandRoutes) {
             if (route.getRelative().equalsIgnoreCase(path)) {

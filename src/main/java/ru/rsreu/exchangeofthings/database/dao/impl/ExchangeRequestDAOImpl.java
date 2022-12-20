@@ -3,7 +3,7 @@ package ru.rsreu.exchangeofthings.database.dao.impl;
 import ru.rsreu.exchangeofthings.database.dao.AbstractDAO;
 import ru.rsreu.exchangeofthings.database.dao.ExchangeRequestDAO;
 import ru.rsreu.exchangeofthings.persistent.entity.User;
-import ru.rsreu.exchangeofthings.persistent.request.ExchangeRequest;
+import ru.rsreu.exchangeofthings.persistent.entity.ExchangeRequest;
 import ru.rsreu.exchangeofthings.persistent.entity.Item;
 import ru.rsreu.exchangeofthings.support.mapper.DAOMapper;
 

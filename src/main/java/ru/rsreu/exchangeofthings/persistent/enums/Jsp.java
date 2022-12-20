@@ -1,5 +1,8 @@
 package ru.rsreu.exchangeofthings.persistent.enums;
 
+/**
+ * Paths to jsp.
+ */
 public enum Jsp {
     LOGIN("/pages/login.jsp"),
 

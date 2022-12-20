@@ -3,7 +3,7 @@ package ru.rsreu.exchangeofthings.service.impl;
 import ru.rsreu.exchangeofthings.database.dao.DAOFactory;
 import ru.rsreu.exchangeofthings.database.dao.SessionDAO;
 import ru.rsreu.exchangeofthings.database.dao.UserDAO;
-import ru.rsreu.exchangeofthings.persistent.response.UserWithSession;
+import ru.rsreu.exchangeofthings.persistent.entity.UserWithSession;
 import ru.rsreu.exchangeofthings.persistent.entity.Session;
 import ru.rsreu.exchangeofthings.persistent.entity.User;
 import ru.rsreu.exchangeofthings.persistent.exception.AuthException;

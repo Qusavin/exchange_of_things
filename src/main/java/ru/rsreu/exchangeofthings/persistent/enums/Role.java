@@ -1,5 +1,8 @@
 package ru.rsreu.exchangeofthings.persistent.enums;
 
+/**
+ * User roles.
+ */
 public enum Role {
     ADMIN("Admin"),
     MODERATOR("Moderator"),

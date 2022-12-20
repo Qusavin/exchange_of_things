@@ -1,5 +1,8 @@
 package ru.rsreu.exchangeofthings.persistent.dto;
 
+/**
+ * Error dto.
+ */
 public class ErrorDTO {
     private String message;
 

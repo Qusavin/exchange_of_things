@@ -1,6 +1,6 @@
 package ru.rsreu.exchangeofthings.service;
 
-import ru.rsreu.exchangeofthings.persistent.request.ExchangeRequest;
+import ru.rsreu.exchangeofthings.persistent.entity.ExchangeRequest;
 import ru.rsreu.exchangeofthings.persistent.enums.Status;
 
 import java.util.List;

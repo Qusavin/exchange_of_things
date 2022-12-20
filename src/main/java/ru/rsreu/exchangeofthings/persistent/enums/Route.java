@@ -1,5 +1,8 @@
 package ru.rsreu.exchangeofthings.persistent.enums;
 
+/**
+ * Application routes.
+ */
 public enum Route {
     LOGIN("/login"),
     LOGOUT("/logout"),

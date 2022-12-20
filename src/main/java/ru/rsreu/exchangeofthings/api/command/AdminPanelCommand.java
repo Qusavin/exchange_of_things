@@ -1,6 +1,6 @@
 package ru.rsreu.exchangeofthings.api.command;
 
-import ru.rsreu.exchangeofthings.persistent.response.UserWithSession;
+import ru.rsreu.exchangeofthings.persistent.entity.UserWithSession;
 import ru.rsreu.exchangeofthings.persistent.entity.User;
 import ru.rsreu.exchangeofthings.persistent.enums.AdminPanelMode;
 import ru.rsreu.exchangeofthings.persistent.enums.Jsp;

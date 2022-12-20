@@ -5,6 +5,9 @@ import ru.rsreu.exchangeofthings.persistent.enums.Route;
 
 import java.util.*;
 
+/**
+ * Config of routes for specific role.
+ */
 public class AuthConfig {
     private static final Map<Role, List<Route>> roleRoutes = Map.ofEntries(
             Map.entry(Role.USER, List.of(
@@ -23,10 +26,22 @@ public class AuthConfig {
             Map.entry(Role.ADMIN, Route.ADMIN_PANEL)
     );
 
+    /**
+     * Get role's routes.
+     *
+     * @param role Role
+     * @return list of role's routes
+     */
     public static List<Route> getRoutes(Role role) {
         return roleRoutes.get(role);
     }
 
+    /**
+     * Get role start route.
+     *
+     * @param role Role
+     * @return role start route
+     */
     public static Route getStartPage(Role role) {
         return roleStartPage.get(role);
     }

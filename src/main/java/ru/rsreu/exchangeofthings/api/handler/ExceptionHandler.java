@@ -8,6 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class ExceptionHandler extends Router {
+    /**
+     * Handle exceptions got from controller
+     *
+     * @param exception Exception
+     * @throws ServletException
+     * @throws IOException
+     */
     public void handleException(Exception exception) throws ServletException, IOException {
         if (exception instanceof AuthException) {
             json(new ErrorDTO("Invalid username or password"), HttpServletResponse.SC_BAD_REQUEST);

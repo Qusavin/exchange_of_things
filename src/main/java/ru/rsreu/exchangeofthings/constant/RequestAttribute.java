@@ -1,5 +1,8 @@
 package ru.rsreu.exchangeofthings.constant;
 
+/**
+ * Request attributes.
+ */
 public class RequestAttribute {
     public static final String ITEMS = "items";
     public static final String ITEM = "item";
