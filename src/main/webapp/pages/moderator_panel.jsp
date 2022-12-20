@@ -8,7 +8,7 @@
 <body id="moderator-panel-page" class="dark:bg-slate-500">
 <%@include file="/templates/header.jsp" %>
 <div class="container mx-auto pt-14">
-    <div class="w-3/5 mx-auto mt-8 overflow-x-auto relative drop-shadow-lg sm:rounded-lg">
+    <div class="w-3/5 overflow-hidden mx-auto mt-8 relative drop-shadow-lg sm:rounded-lg">
         <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#tab-content"
                 role="tablist">
@@ -49,7 +49,7 @@
                  id="users"
                  role="tabpanel"
                  aria-labelledby="my-things-tab">
-                <div id="users-container" class="mb-3">
+                <div id="users-container" class="mb-3 overflow-y-auto max-h-[66%]">
                     <%@include file="/pages/moderator-panel/users-table.jsp" %>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                  id="user-things"
                  role="tabpanel"
                  aria-labelledby="my-things-on-exchange-tab">
-                <div id="user-things-container">
+                <div id="user-things-container" class="overflow-y-auto max-h-[66%]">
                     <%@include file="/pages/moderator-panel/things-table.jsp" %>
                 </div>
             </div>
@@ -65,13 +65,17 @@
                  id="exchange-requests"
                  role="tabpanel"
                  aria-labelledby="things-on-exchange-tab">
-                <div id="exchange-requests-container">
+                <div id="exchange-requests-container" class="overflow-y-auto max-h-[66%]">
                     <%@include file="/pages/moderator-panel/exchange-requests-table.jsp" %>
                 </div>
             </div>
         </div>
    </div>
 </div>
+
+<%@include file="/pages/moderator-panel/confirm-save-changes-modal.jsp" %>
+<%@include file="/pages/moderator-panel/confirm-decline-request-modal.jsp" %>
+<%@include file="/pages/moderator-panel/confirm-remove-user-thing-modal.jsp" %>
 
 <%@include file="/templates/scripts.jsp" %>
 </body>

@@ -24,7 +24,13 @@ function main() {
 }
 
 function hydrateExchangeRequestsTable() {
+    const confirmModalElement = document.querySelector('#confirm-decline-request-modal');
+    const toggleBtnElement = confirmModalElement.querySelector('.close');
+    const confirmBtnElement = confirmModalElement.querySelector('.confirm');
+
     const tableRowElements = exchangeRequestsContainerElement.querySelectorAll('.table-row');
+
+    let body = null;
 
     [...tableRowElements].forEach(tableRowElement => {
         const senItemId = tableRowElement
@@ -41,18 +47,27 @@ function hydrateExchangeRequestsTable() {
         formData.set('status', Status.Rejected);
 
         declineBtnElement.addEventListener('click', () => {
-            makeRequest('moderator-panel', {
-                body: getUrlencodedFormData(formData),
-                method: 'post',
-            }).then(html => {
-                exchangeRequestsContainerElement.innerHTML = html;
-                hydrateExchangeRequestsTable();
-            });
+            toggleBtnElement.click();
+            body = getUrlencodedFormData(formData);
+        });
+    });
+
+    confirmBtnElement.addEventListener('click', () => {
+        makeRequest('moderator-panel', {
+            body,
+            method: 'post',
+        }).then(res => {
+            exchangeRequestsContainerElement.innerHTML = res.data;
+            hydrateExchangeRequestsTable();
         });
     });
 };
 
 function hydrateUsersTable() {
+    const confirmModalElement = document.querySelector('#confirm-save-changes-modal');
+    const toggleBtnElement = confirmModalElement.querySelector('.close');
+    const confirmBtnElement = confirmModalElement.querySelector('.confirm');
+
     const saveChangesBtnElement = usersContainerElement.querySelector('#save-changes');
 
     const tableRowElements = usersContainerElement.querySelectorAll('.table-row');
@@ -92,10 +107,14 @@ function hydrateUsersTable() {
         };
     });
 
+    let body = null;
+
     saveChangesBtnElement.onclick = () => {
         if (changes === 0) {
             return;
         }
+
+        toggleBtnElement.click();
 
         const userIds = state
             .filter((rowState, index) =>
@@ -107,32 +126,47 @@ function hydrateUsersTable() {
 
         userIds.forEach(id => formData.append('id', id));
 
+        body = getUrlencodedFormData(formData);
+    };
+
+    confirmBtnElement.addEventListener('click', () => {
         makeRequest('moderator-panel', {
-            body: getUrlencodedFormData(formData),
+            body,
             method: 'post'
         }).then(() => window.location.reload());
-    };
+    })
 }
 
 function hydrateUserThingsTable() {
+    const confirmModalElement = document.querySelector('#confirm-remove-user-thing-modal');
+    const toggleBtnElement = confirmModalElement.querySelector('.close');
+    const confirmBtnElement = confirmModalElement.querySelector('.confirm');
+
     const tableRowElements = userThingsContainerElement.querySelectorAll('.table-row');
+
+    let removeItemId = null;
 
     [...tableRowElements].forEach(tableRowElement => {
         const itemId = tableRowElement.querySelector('.thing-id').innerText.trim();
         const removeBtnElement = tableRowElement.querySelector('.remove-btn');
 
         removeBtnElement.addEventListener('click', () => {
-            const formData = new FormData();
+            toggleBtnElement.click();
+            removeItemId = itemId;
+        });
+    });
 
-            formData.set('remove_item_id', itemId);
+    confirmBtnElement.addEventListener('click', () => {
+        const formData = new FormData();
 
-            makeRequest('moderator-panel', {
-                body: getUrlencodedFormData(formData),
-                method: 'post',
-            }).then(html => {
-                userThingsContainerElement.innerHTML = html;
-                hydrateUserThingsTable();
-            });
+        formData.set('remove_item_id', removeItemId);
+
+        makeRequest('moderator-panel', {
+            body: getUrlencodedFormData(formData),
+            method: 'post',
+        }).then(res => {
+            userThingsContainerElement.innerHTML = res.data;
+            hydrateUserThingsTable();
         });
     });
 }

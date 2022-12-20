@@ -124,7 +124,7 @@ function main() {
         makeRequest(`user-panel?table_part=${currentTable}&add_item=true`, {
             body: getUrlencodedFormData(formData),
             method: 'post'
-        }).then(html => renderCurrentTable(html));
+        }).then(res => renderCurrentTable(res.data));
 
         addThingModalCloseElement.click();
 
@@ -142,11 +142,10 @@ function renderCurrentTable(html) {
 
 function fetchTable(tableName) {
     currentTable = tableName;
-    return fetch(`user-panel?table_part=${tableName}`, {
-        method: 'get',
-        credentials: 'same-origin'
-    })
-        .then(res => res.text());
+
+    return makeRequest(`user-panel?table_part=${tableName}`, {
+        method: 'get'
+    }).then(res => res.data);
 }
 
 function hydrateExchangeItemsTable() {
@@ -177,7 +176,7 @@ function hydrateMyExchangeItemsTable() {
         removeBtnElement.addEventListener('click', () => {
             makeRequest(`user-panel?table_part=${currentTable}&exchange_item_id=${itemId}`, {
                 method: 'post',
-            }).then(html => renderCurrentTable(html));
+            }).then(res => renderCurrentTable(res.data));
         });
         openBtnElement.addEventListener('click', () => {
             redirect(`user-panel/thing?item_id=${itemId}`);
@@ -196,13 +195,13 @@ function hydrateMyItemsTable() {
         removeBtnElement.addEventListener('click', () => {
             makeRequest(`user-panel?table_part=${currentTable}&remove_item_id=${itemId}`, {
                 method: 'post',
-            }).then(html => renderCurrentTable(html));
+            }).then(res => renderCurrentTable(res.data));
         });
 
         addToExchangeBtnElement.addEventListener('click', () => {
             makeRequest(`user-panel?table_part=${currentTable}&exchange_item_id=${itemId}`, {
                 method: 'post'
-            }).then(html => renderCurrentTable(html));
+            }).then(res => renderCurrentTable(res.data));
         });
     });
 }

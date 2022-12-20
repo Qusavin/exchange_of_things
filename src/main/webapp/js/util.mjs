@@ -25,12 +25,11 @@ export function redirect(path) {
 }
 
 export async function makeRequest(relativePath, options, plainText = true) {
-    const body = options.body ?? {};
     const method = options.method ?? 'get';
 
     const response = await fetch(getUrl(relativePath), {
         method,
-        body,
+        body: options.body,
         credentials: 'same-origin',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     });

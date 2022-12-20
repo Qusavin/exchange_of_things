@@ -9,7 +9,7 @@
 <%@include file="./user-panel/header.jsp" %>
 
 <div id="user-panel" class="container mx-auto pt-14">
-    <div class="mt-8 overflow-x-auto relative drop-shadow-lg sm:rounded-lg">
+    <div class="mt-8 overflow-hidden relative drop-shadow-lg sm:rounded-lg">
         <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#tab-content"
                 role="tablist">
@@ -50,7 +50,7 @@
                  id="my-things"
                  role="tabpanel"
                  aria-labelledby="my-things-tab">
-                <div id="my-things-container" class="mb-3">
+                <div id="my-things-container" class="mb-3 overflow-y-auto max-h-[66%]">
                     <%@include file="user-panel/my_things_table.jsp" %>
                 </div>
                 <div>
@@ -64,13 +64,13 @@
                  id="my-things-on-exchange"
                  role="tabpanel"
                  aria-labelledby="my-things-on-exchange-tab">
-                <div id="my-things-on-exchange-container"></div>
+                <div id="my-things-on-exchange-container" class="overflow-y-auto max-h-[66%]"></div>
             </div>
             <div class="hidden rounded-lg"
                  id="things-on-exchange"
                  role="tabpanel"
                  aria-labelledby="things-on-exchange-tab">
-                <div id="things-on-exchange-container"></div>
+                <div id="things-on-exchange-container" class="overflow-y-auto max-h-[66%]"></div>
             </div>
         </div>
     </div>

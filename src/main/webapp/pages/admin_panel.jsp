@@ -8,9 +8,9 @@
 <body id="admin-panel-page" class="dark:bg-slate-500">
 <%@include file="../templates/header.jsp" %>
 <div class="container mx-auto pt-14">
-    <div class="w-3/5 mx-auto mt-8 overflow-x-auto relative drop-shadow-lg sm:rounded-lg">
+    <div class="w-3/5 mx-auto mt-8 overflow-hidden relative drop-shadow-lg sm:rounded-lg">
         <div class="bg-white dark:bg-gray-700 dark:text-gray-400">
-            <div id="table-container">
+            <div id="table-container" class="overflow-y-auto max-h-[66%]">
                 <%@include file="/pages/admin-panel/table.jsp" %>
             </div>
             <div class="py-2 px-4 ">
