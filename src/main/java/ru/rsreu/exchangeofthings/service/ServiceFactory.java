@@ -1,9 +1,6 @@
 package ru.rsreu.exchangeofthings.service;
 
-import ru.rsreu.exchangeofthings.service.impl.ExchangeRequestServiceImpl;
-import ru.rsreu.exchangeofthings.service.impl.ItemServiceImpl;
-import ru.rsreu.exchangeofthings.service.impl.SessionServiceImpl;
-import ru.rsreu.exchangeofthings.service.impl.UserServiceImpl;
+import ru.rsreu.exchangeofthings.service.impl.*;
 
 public class ServiceFactory {
     private ServiceFactory() {
@@ -23,5 +20,9 @@ public class ServiceFactory {
 
     public static ExchangeRequestService getExchangeRequestService() {
         return ExchangeRequestServiceImpl.getInstance();
+    }
+
+    public static NotificationService getNotificationService() {
+        return NotificationServiceImpl.getInstance();
     }
 }

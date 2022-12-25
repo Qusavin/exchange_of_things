@@ -14,6 +14,14 @@ public class User implements Principal {
     private Boolean isBlocked;
     private String role;
 
+    /**
+     * Public constructor
+     * @param username
+     * @param password
+     * @param name
+     * @param isBlocked
+     * @param role
+     */
     public User(String username, String password, String name, Boolean isBlocked, String role) {
         this.username = username;
         this.password = password;
@@ -22,6 +30,13 @@ public class User implements Principal {
         this.role = role;
     }
 
+    /**
+     * Public constructor
+     * @param username
+     * @param password
+     * @param name
+     * @param role
+     */
     public User(String username, String password, String name, String role) {
         this.username = username;
         this.password = password;
@@ -29,6 +44,15 @@ public class User implements Principal {
         this.role = role;
     }
 
+    /**
+     * Public constructor
+     * @param id
+     * @param username
+     * @param password
+     * @param name
+     * @param isBlocked
+     * @param role
+     */
     public User(Integer id, String username, String password, String name, Boolean isBlocked, String role) {
         this.id = id;
         this.username = username;
@@ -38,6 +62,13 @@ public class User implements Principal {
         this.role = role;
     }
 
+    /**
+     * Public constructor
+     * @param id
+     * @param username
+     * @param name
+     * @param role
+     */
     public User(Integer id, String username, String name, String role) {
         this.id = id;
         this.username = username;

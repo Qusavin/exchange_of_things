@@ -34,3 +34,12 @@ SELECT exchange_requests_seq.nextval
 INTO :new.id
 FROM dual;
 END;
+
+CREATE OR REPLACE TRIGGER notifications_on_insert
+  BEFORE INSERT ON notifications
+  FOR EACH ROW
+BEGIN
+SELECT notifications_seq.nextval
+INTO :new.id
+FROM dual;
+END;

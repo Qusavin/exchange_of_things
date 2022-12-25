@@ -106,3 +106,35 @@ ALTER TABLE exchange_requests
     ADD CONSTRAINT exchange_sender_fk
         FOREIGN KEY (sender_item_id)
             REFERENCES items (id);
+
+-- Создание таблицы Уведомления
+CREATE TABLE notifications
+(
+    id NUMBER,
+    sender_id NUMBER NOT NULL,
+    receiver_id NUMBER NOT NULL,
+    message VARCHAR(200 CHAR)
+);
+
+-- Первичный ключ таблицы Запросы вступления в команду
+ALTER TABLE notifications
+    ADD (
+    CONSTRAINT notifications_pk PRIMARY KEY (id)
+  );
+
+-- Создание последовательности для автогенерации первичного ключа
+CREATE SEQUENCE notifications_seq START WITH 1;
+
+-- Создание внешнего ключа на таблицу Пользователи
+ALTER TABLE notifications
+    ADD CONSTRAINT notifications_receiver_fk
+        FOREIGN KEY (receiver_id)
+            REFERENCES users (id)
+            ON DELETE CASCADE;
+
+-- Создание внешнего ключа на таблицу Пользователи
+ALTER TABLE notifications
+    ADD CONSTRAINT notifications_sender_fk
+        FOREIGN KEY (sender_id)
+            REFERENCES users (id)
+            ON DELETE CASCADE;

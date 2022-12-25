@@ -12,12 +12,27 @@ public class ExchangeRequest {
     private String status;
     private Date date;
 
+    /**
+     * Public constructor
+     * @param receiverItem
+     * @param senderItem
+     * @param status
+     */
     public ExchangeRequest(Item receiverItem, Item senderItem, String status) {
         this.receiverItem = receiverItem;
         this.senderItem = senderItem;
         this.status = status;
     }
 
+    /**
+     * Public constructor
+     *
+     * @param id
+     * @param receiverItem
+     * @param senderItem
+     * @param status
+     * @param date
+     */
     public ExchangeRequest(Integer id, Item receiverItem, Item senderItem, String status, Date date) {
         this.id = id;
         this.receiverItem = receiverItem;
