@@ -11,6 +11,7 @@ import java.util.*;
 public class AuthConfig {
     private static final Map<Role, List<Route>> roleRoutes = Map.ofEntries(
             Map.entry(Role.USER, List.of(
+                    Route.NOTIFICATION,
                     Route.USER_PANEL_THING,
                     Route.USER_PANEL_EXCHANGE,
                     Route.USER_PANEL,

@@ -19,9 +19,8 @@ public class NotificationDAOImpl extends AbstractDAO implements NotificationDAO 
         String query = resourcer.getString("notification.query.save");
 
         try (PreparedStatement st = connection.prepareStatement(query)) {
-            st.setInt(1, notification.getReceiverId());
-            st.setInt(2, notification.getSenderId());
-            st.setString(3, notification.getMessage());
+            st.setInt(1, notification.getUserId());
+            st.setString(2, notification.getMessage());
 
             st.executeUpdate();
         } catch (SQLException e) {
@@ -49,7 +48,6 @@ public class NotificationDAOImpl extends AbstractDAO implements NotificationDAO 
 
         try (PreparedStatement st = connection.prepareStatement(query)) {
             st.setInt(1, userId);
-            st.setInt(2, userId);
 
             ResultSet rs = st.executeQuery();
 

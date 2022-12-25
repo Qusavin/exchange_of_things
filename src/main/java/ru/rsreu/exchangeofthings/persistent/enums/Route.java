@@ -11,6 +11,7 @@ public enum Route {
     USER_PANEL_EXCHANGE("/user-panel/exchange"),
     USER_PANEL("/user-panel"),
     MODERATOR_PANEL("/moderator-panel"),
+    NOTIFICATION("/notification"),
     NOT_FOUND("/404");
 
     private final String route;

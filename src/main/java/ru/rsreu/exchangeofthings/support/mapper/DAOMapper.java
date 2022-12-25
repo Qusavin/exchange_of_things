@@ -106,8 +106,7 @@ public class DAOMapper {
     public static Notification mapToNotification(ResultSet resultSet) throws SQLException {
         return new Notification(
                 resultSet.getInt("id"),
-                resultSet.getInt("sender_id"),
-                resultSet.getInt("receiver_id"),
+                resultSet.getInt("user_id"),
                 resultSet.getString("message")
         );
     }

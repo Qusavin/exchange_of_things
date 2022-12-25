@@ -64,11 +64,16 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
             itemDAO.updateOwner(recItem.getId(), senItem.getOwner().getId());
         }
 
-        notificationDAO.save(new Notification(
-                senItem.getOwner().getId(),
-                recItem.getOwner().getId(),
-                MessageUtil.getDeclineMessage(senItem.getTitle(), recItem.getTitle())
-        ));
+        if (status == Status.REJECTED) {
+            notificationDAO.save(new Notification(
+                    senItem.getOwner().getId(),
+                    MessageUtil.getDeclineMessage(senItem.getTitle(), recItem.getTitle())
+            ));
+            notificationDAO.save(new Notification(
+                    recItem.getOwner().getId(),
+                    MessageUtil.getDeclineMessage(senItem.getTitle(), recItem.getTitle())
+            ));
+        }
     }
 
     @Override

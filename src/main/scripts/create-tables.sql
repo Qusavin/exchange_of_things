@@ -111,8 +111,7 @@ ALTER TABLE exchange_requests
 CREATE TABLE notifications
 (
     id NUMBER,
-    sender_id NUMBER NOT NULL,
-    receiver_id NUMBER NOT NULL,
+    user_id NUMBER NOT NULL,
     message VARCHAR(200 CHAR)
 );
 
@@ -127,14 +126,7 @@ CREATE SEQUENCE notifications_seq START WITH 1;
 
 -- Создание внешнего ключа на таблицу Пользователи
 ALTER TABLE notifications
-    ADD CONSTRAINT notifications_receiver_fk
-        FOREIGN KEY (receiver_id)
-            REFERENCES users (id)
-            ON DELETE CASCADE;
-
--- Создание внешнего ключа на таблицу Пользователи
-ALTER TABLE notifications
-    ADD CONSTRAINT notifications_sender_fk
-        FOREIGN KEY (sender_id)
+    ADD CONSTRAINT user_id_fk
+        FOREIGN KEY (user_id)
             REFERENCES users (id)
             ON DELETE CASCADE;

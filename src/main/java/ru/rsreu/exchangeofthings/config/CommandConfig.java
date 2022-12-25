@@ -14,6 +14,7 @@ public class CommandConfig {
             Map.entry(Route.LOGIN, new LoginCommand()),
             Map.entry(Route.LOGOUT, new LogoutCommand()),
             Map.entry(Route.MODERATOR_PANEL, new ModeratorPanelCommand()),
+            Map.entry(Route.NOTIFICATION, new NotificationCommand()),
             Map.entry(Route.USER_PANEL, new UserPanelCommand()),
             Map.entry(Route.USER_PANEL_THING, new UserPanelThingCommand()),
             Map.entry(Route.USER_PANEL_EXCHANGE, new UserPanelExchangeCommand()),
@@ -27,6 +28,8 @@ public class CommandConfig {
             Route.LOGOUT,
 
             Route.MODERATOR_PANEL,
+
+            Route.NOTIFICATION,
 
             Route.USER_PANEL_EXCHANGE,
             Route.USER_PANEL_THING,

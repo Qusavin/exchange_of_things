@@ -31,6 +31,17 @@ function main() {
     const exchangeItemsTabElement = document.querySelector('#things-on-exchange-tab');
     const exchangeItemsContainerElement = document.querySelector('#things-on-exchange-container');
 
+    [...document.querySelectorAll('.remove-notification-btn')].forEach(removeNotificationBtnEl => {
+        const notificationId = removeNotificationBtnEl.getAttribute('data-notification-id');
+
+        removeNotificationBtnEl.addEventListener('click', async () => {
+            await makeRequest(`notification?notification_id=${notificationId}`, {
+                method: 'post'
+            });
+            removeNotificationBtnEl.parentElement.parentElement.remove();
+        });
+    });
+
     tableContainer = {
         [Table.MY_ITEMS]: myItemsContainerElement,
         [Table.MY_EXCHANGE_ITEMS]: myExchangeItemsContainerElement,
@@ -47,9 +58,10 @@ function main() {
             .then(html => renderCurrentTable(html));
     });
 
-    exchangeItemsTabElement.addEventListener('click', () => {
-        fetchTable(Table.EXCHANGE_ITEMS)
-            .then(html => renderCurrentTable(html));
+    exchangeItemsTabElement.addEventListener('click', async () => {
+        renderCurrentTable(await fetchTable(Table.MY_ITEMS));
+        renderCurrentTable(await fetchTable(Table.MY_EXCHANGE_ITEMS));
+        renderCurrentTable(await fetchTable(Table.EXCHANGE_ITEMS));
     });
 
     hydrateMyItemsTable();
@@ -150,15 +162,22 @@ function fetchTable(tableName) {
 
 function hydrateExchangeItemsTable() {
     const tableRowElements = tableContainer[Table.EXCHANGE_ITEMS].querySelectorAll('.table-row');
+    const disableButtons = ![...document.querySelector('#my-things-container').querySelectorAll('.exchange')]
+        .some(btn => btn.disabled);
 
     [...tableRowElements].forEach(tableRowElement => {
         const itemId = tableRowElement.querySelector('.thing-id').innerText.trim();
         const requestExchangeBtnElement = tableRowElement.querySelector('.request-exchange');
         const openBtnElement = tableRowElement.querySelector('.open');
 
-        requestExchangeBtnElement.addEventListener('click', () => {
-            redirect(`user-panel/exchange?rec_item_id=${itemId}`);
-        });
+        requestExchangeBtnElement.disabled = disableButtons;
+
+        if (!disableButtons) {
+            requestExchangeBtnElement.addEventListener('click', () => {
+                redirect(`user-panel/exchange?rec_item_id=${itemId}`);
+            });
+        }
+
         openBtnElement.addEventListener('click', () => {
             redirect(`user-panel/thing?item_id=${itemId}`);
         });

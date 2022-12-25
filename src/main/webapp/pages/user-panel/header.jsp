@@ -5,13 +5,13 @@
         <div class="text-lg font-medium">Exchange of things</div>
         <div class="flex items-center">
             <button id="dropdown-notification-btn" data-dropdown-toggle="dropdownNotification"
-                    class="${exchangeRequests.size() > 0 ? "" : "cursor-default"} relative p-1 inline-flex items-center text-sm text-center text-white hover:bg-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-300 rounded-lg"
+                    class="${exchangeRequests.size() > 0 || notifications.size() > 0 ? "" : "cursor-default"} relative p-1 inline-flex items-center text-sm text-center text-white hover:bg-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-300 rounded-lg"
                     type="button">
                 <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                      xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
                 </svg>
-                <c:if test="${exchangeRequests.size() > 0}">
+                <c:if test="${exchangeRequests.size() > 0 || notifications.size() > 0}">
                     <div class="inline-flex absolute top-1 right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-purple-500 dark:border-purple-900"></div>
                 </c:if>
             </button>
@@ -22,7 +22,7 @@
             </a>
             <!-- Dropdown menu -->
 
-            <c:if test="${exchangeRequests.size() > 0}">
+            <c:if test="${exchangeRequests.size() > 0 || notifications.size() > 0}">
                 <div id="dropdownNotification"
                      class="hidden z-20 w-full max-w-sm bg-white rounded overflow-hidden divide-y divide-gray-100 shadow dark:bg-gray-800 dark:divide-gray-700"
                      aria-labelledby="dropdown-notification-btn">
@@ -42,6 +42,22 @@
                                     </div>
                                 </div>
                             </a>
+                        </c:forEach>
+                        <c:forEach items="${notifications}" var="notification">
+                            <div class="flex py-3 px-4 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <div class="pl-3 w-full flex items-center">
+                                    <div class="text-gray-500 text-sm dark:text-gray-400">
+                                        ${notification.getMessage()}
+                                    </div>
+                                    <button
+                                            type="button"
+                                            data-notification-id="${notification.getId()}"
+                                            class="remove-notification-btn font-medium text-red-600"
+                                    >
+                                        <span class="material-symbols-outlined font-medium">close</span>
+                                    </button>
+                                </div>
+                            </div>
                         </c:forEach>
                     </div>
                 </div>

@@ -5,20 +5,17 @@ package ru.rsreu.exchangeofthings.persistent.entity;
  */
 public class Notification {
     private int id;
-    private int senderId;
-    private int receiverId;
+    private int userId;
     private String message;
 
-    public Notification(int senderId, int receiverId, String message) {
-        this.senderId = senderId;
-        this.receiverId = receiverId;
+    public Notification(int userId, String message) {
+        this.userId = userId;
         this.message = message;
     }
 
-    public Notification(int id, int senderId, int receiverId, String message) {
+    public Notification(int id, int userId, String message) {
         this.id = id;
-        this.senderId = senderId;
-        this.receiverId = receiverId;
+        this.userId = userId;
         this.message = message;
     }
 
@@ -30,20 +27,12 @@ public class Notification {
         this.id = id;
     }
 
-    public int getSenderId() {
-        return senderId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setSenderId(int senderId) {
-        this.senderId = senderId;
-    }
-
-    public int getReceiverId() {
-        return receiverId;
-    }
-
-    public void setReceiverId(int receiverId) {
-        this.receiverId = receiverId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getMessage() {

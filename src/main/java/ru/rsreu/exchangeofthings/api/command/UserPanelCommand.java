@@ -2,14 +2,12 @@ package ru.rsreu.exchangeofthings.api.command;
 
 import ru.rsreu.exchangeofthings.persistent.entity.ExchangeRequest;
 import ru.rsreu.exchangeofthings.persistent.entity.Item;
+import ru.rsreu.exchangeofthings.persistent.entity.Notification;
 import ru.rsreu.exchangeofthings.persistent.entity.User;
 import ru.rsreu.exchangeofthings.persistent.enums.Jsp;
 import ru.rsreu.exchangeofthings.persistent.enums.Status;
 import ru.rsreu.exchangeofthings.persistent.enums.UserPanelTablePart;
-import ru.rsreu.exchangeofthings.service.ExchangeRequestService;
-import ru.rsreu.exchangeofthings.service.ItemService;
-import ru.rsreu.exchangeofthings.service.ServiceFactory;
-import ru.rsreu.exchangeofthings.service.UserService;
+import ru.rsreu.exchangeofthings.service.*;
 import ru.rsreu.exchangeofthings.support.util.UserUtil;
 
 import javax.servlet.ServletContext;
@@ -20,14 +18,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ru.rsreu.exchangeofthings.constant.RequestAttribute.EXCHANGE_REQUESTS;
-import static ru.rsreu.exchangeofthings.constant.RequestAttribute.ITEMS;
+import static ru.rsreu.exchangeofthings.constant.RequestAttribute.*;
 import static ru.rsreu.exchangeofthings.constant.RequestParam.*;
 
 public class UserPanelCommand extends FrontCommand {
     private ItemService itemService;
     private UserService userService;
     private ExchangeRequestService exchangeRequestService;
+    private NotificationService notificationService;
     private User user;
 
     @Override
@@ -38,6 +36,7 @@ public class UserPanelCommand extends FrontCommand {
         itemService = ServiceFactory.getItemService();
         userService = ServiceFactory.getUserService();
         exchangeRequestService = ServiceFactory.getExchangeRequestService();
+        notificationService = ServiceFactory.getNotificationService();
     }
 
     @Override
@@ -133,8 +132,10 @@ public class UserPanelCommand extends FrontCommand {
         List<ExchangeRequest> exchangeRequests = exchangeRequestService.findByReceiverIdAndStatus(
                 user.getId(), Status.IN_PROCESS.getValue()
         );
+        List<Notification> notifications = notificationService.findByUserId(user.getId());
 
         request.setAttribute(ITEMS, items);
+        request.setAttribute(NOTIFICATIONS, notifications);
         request.setAttribute(EXCHANGE_REQUESTS, exchangeRequests);
 
         forward(Jsp.USER_PANEL);

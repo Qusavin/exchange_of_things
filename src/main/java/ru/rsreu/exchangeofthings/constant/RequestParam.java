@@ -23,4 +23,5 @@ public class RequestParam {
     public static final String CATEGORY = "category";
     public static final String DESCRIPTION = "description";
     public static final String MODE = "mode";
+    public static final String NOTIFICATION_ID = "notification_id";
 }
