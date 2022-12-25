@@ -3,10 +3,14 @@ package ru.rsreu.exchangeofthings.service.impl;
 import ru.rsreu.exchangeofthings.database.dao.DAOFactory;
 import ru.rsreu.exchangeofthings.database.dao.ExchangeRequestDAO;
 import ru.rsreu.exchangeofthings.database.dao.ItemDAO;
+import ru.rsreu.exchangeofthings.database.dao.NotificationDAO;
 import ru.rsreu.exchangeofthings.persistent.entity.ExchangeRequest;
 import ru.rsreu.exchangeofthings.persistent.entity.Item;
+import ru.rsreu.exchangeofthings.persistent.entity.Notification;
 import ru.rsreu.exchangeofthings.persistent.enums.Status;
 import ru.rsreu.exchangeofthings.service.ExchangeRequestService;
+import ru.rsreu.exchangeofthings.support.mapper.DAOMapper;
+import ru.rsreu.exchangeofthings.support.util.MessageUtil;
 
 import java.util.List;
 
@@ -14,10 +18,12 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
     private static volatile ExchangeRequestServiceImpl instance;
     private ExchangeRequestDAO exchangeRequestDAO;
     private ItemDAO itemDAO;
+    private NotificationDAO notificationDAO;
 
-    public ExchangeRequestServiceImpl(ExchangeRequestDAO exchangeRequestDAO, ItemDAO itemDAO) {
+    public ExchangeRequestServiceImpl(ExchangeRequestDAO exchangeRequestDAO, ItemDAO itemDAO, NotificationDAO notificationDAO) {
         this.exchangeRequestDAO = exchangeRequestDAO;
         this.itemDAO = itemDAO;
+        this.notificationDAO = notificationDAO;
     }
 
     @Override
@@ -57,6 +63,12 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
             itemDAO.updateOwner(senItem.getId(), recItem.getOwner().getId());
             itemDAO.updateOwner(recItem.getId(), senItem.getOwner().getId());
         }
+
+        notificationDAO.save(new Notification(
+                senItem.getOwner().getId(),
+                recItem.getOwner().getId(),
+                MessageUtil.getDeclineMessage(senItem.getTitle(), recItem.getTitle())
+        ));
     }
 
     @Override
@@ -69,8 +81,9 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
             if (instance == null) {
                 ExchangeRequestDAO exchangeRequestDAO = DAOFactory.getExchangeRequestDAO();
                 ItemDAO itemDAO = DAOFactory.getItemDAO();
+                NotificationDAO notificationDAO = DAOFactory.getNotificationDAO();
 
-                instance = new ExchangeRequestServiceImpl(exchangeRequestDAO, itemDAO);
+                instance = new ExchangeRequestServiceImpl(exchangeRequestDAO, itemDAO, notificationDAO);
             }
         }
 

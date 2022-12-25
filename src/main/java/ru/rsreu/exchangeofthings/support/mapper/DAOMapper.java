@@ -1,9 +1,6 @@
 package ru.rsreu.exchangeofthings.support.mapper;
 
-import ru.rsreu.exchangeofthings.persistent.entity.ExchangeRequest;
-import ru.rsreu.exchangeofthings.persistent.entity.Item;
-import ru.rsreu.exchangeofthings.persistent.entity.Session;
-import ru.rsreu.exchangeofthings.persistent.entity.User;
+import ru.rsreu.exchangeofthings.persistent.entity.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -103,6 +100,15 @@ public class DAOMapper {
                 ),
                 resultSet.getString("e_status"),
                 resultSet.getDate("e_exchange_date")
+        );
+    }
+
+    public static Notification mapToNotification(ResultSet resultSet) throws SQLException {
+        return new Notification(
+                resultSet.getInt("id"),
+                resultSet.getInt("sender_id"),
+                resultSet.getInt("receiver_id"),
+                resultSet.getString("message")
         );
     }
 }

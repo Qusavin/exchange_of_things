@@ -1,9 +1,6 @@
 package ru.rsreu.exchangeofthings.database.dao;
 
-import ru.rsreu.exchangeofthings.database.dao.impl.ExchangeRequestDAOImpl;
-import ru.rsreu.exchangeofthings.database.dao.impl.ItemDAOImpl;
-import ru.rsreu.exchangeofthings.database.dao.impl.SessionDAOImpl;
-import ru.rsreu.exchangeofthings.database.dao.impl.UserDAOImpl;
+import ru.rsreu.exchangeofthings.database.dao.impl.*;
 
 /**
  * Factory of dao.
@@ -49,6 +46,10 @@ public class DAOFactory {
      */
     public static ExchangeRequestDAO getExchangeRequestDAO() {
         return ExchangeRequestDAOImpl.getInstance();
+    }
+
+    public static NotificationDAO getNotificationDAO() {
+        return NotificationDAOImpl.getInstance();
     }
 }
 

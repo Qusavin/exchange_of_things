@@ -10,11 +10,22 @@ public class Session {
     private Date expiredAt;
     private User user;
 
+    /**
+     * Public constructor
+     * @param expiredAt
+     * @param user
+     */
     public Session(Date expiredAt, User user) {
         this.expiredAt = expiredAt;
         this.user = user;
     }
 
+    /**
+     * Public constructor
+     * @param id
+     * @param expiredAt
+     * @param user
+     */
     public Session(Integer id, Date expiredAt, User user) {
         this.id = id;
         this.expiredAt = expiredAt;

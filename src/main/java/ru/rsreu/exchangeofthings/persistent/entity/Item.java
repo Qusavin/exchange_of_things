@@ -13,10 +13,22 @@ public class Item {
     private Boolean isAvailable;
     private User owner;
 
+    /**
+     * Public constructor
+     * @param id
+     */
     public Item(Integer id) {
         this.id = id;
     }
 
+    /**
+     * Public constructor
+     * @param title
+     * @param image
+     * @param category
+     * @param description
+     * @param owner
+     */
     public Item(String title, String image, String category, String description, User owner) {
         this.title = title;
         this.image = image;
@@ -25,6 +37,17 @@ public class Item {
         this.owner = owner;
     }
 
+    /**
+     * Public constructor
+     * @param id
+     * @param title
+     * @param description
+     * @param image
+     * @param viewsNumber
+     * @param category
+     * @param isAvailable
+     * @param owner
+     */
     public Item(Integer id, String title, String description, String image, Integer viewsNumber, String category, Boolean isAvailable, User owner) {
         this.id = id;
         this.title = title;
